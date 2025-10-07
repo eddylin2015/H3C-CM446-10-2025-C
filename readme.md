@@ -32,6 +32,22 @@ H3C Certified Network Engineer for Routing &amp; Switching Plus(H3CNE-RS+)
 
 ## PDAC 3.18 3.1.13
 
+## Bandwith
+
+Bandwidth is the maximum amount of data that can be transmitted over a network connection in a given amount of time, gigabits per second (Gbps).
+
+How Bandwidth Works
+Data Transmission Capacity: Think of bandwidth as the capacity of a pipe, not the speed of the water flowing through it. A wider pipe (higher bandwidth) can carry more water (data) at once.
+
+What to Consider
+Throughput: While bandwidth is the maximum theoretical capacity, throughput is the amount of data that actually makes it to your destination in a given time, considering factors like network speed and latency.
+
+## 十分鐘對網絡流分析積為50GB範圍作為合理值
+~ 2Gbps /8 *60 * 10 120GB 1G+1G 光纖
+~ DATA 100GB (-20GB HEADER partiat)
+~ 長方形積, 化作三角形積(因為常見考慮峰值形狀)的話, 10分鐘的積為50GB範圍作為合理值
+
+
 
   
 
