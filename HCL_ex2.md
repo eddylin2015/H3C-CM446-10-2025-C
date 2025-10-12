@@ -30,7 +30,7 @@ https://90apt.com/search/HCL/
 
 2、核心堆叠，采用40G口堆叠
 核心1
-
+```cmd
 <hexin1>sys
 System View: return to User View with Ctrl+Z.
 [hexin1]int range FortyGigE 1/0/53 to FortyGigE 1/0/54
@@ -45,8 +45,9 @@ System View: return to User View with Ctrl+Z.
 [hexin1]int range FortyGigE 1/0/53 to FortyGigE 1/0/54
 [hexin1-if-range]un sh
 [hexin1-if-range]save
+```
 核心2
-
+```cmd
 [hexin2]sys
 [hexin2]irf member 1 renumber 2
 Renumbering the member ID may result in configuration change or loss. Continue?[Y/N]:y
@@ -67,6 +68,7 @@ System View: return to User View with Ctrl+Z.
 [hexin2-if-range]un sh
 [hexin2-if-range]quit
 [hexin2]save
+```
 连接堆叠线后，机器自动重启，此时两台交换机终端都会显示为 hexin1
 
 3、车间汇聚堆叠，采用40G口
@@ -74,7 +76,7 @@ System View: return to User View with Ctrl+Z.
 
 4、按图片为交换机配置IP和VLAN，三层采用路由模式，汇聚下联trunk，接入上联trunk，下联对应vlan
 车间汇聚做端口聚合
-
+```cmd
 [chejianhuiju1]vlan 1004
 [chejianhuiju1-vlan1004]int vlan 1004
 [chejianhuiju1-Vlan-interface1004]ip add 10.0.4.254 24
@@ -95,12 +97,13 @@ System View: return to User View with Ctrl+Z.
 [chejianhuiju1-Bridge-Aggregation1]port link-type trunk
 [chejianhuiju1-Bridge-Aggregation1]port trunk permit vlan all
 [chejianhuiju1-Bridge-Aggregation1]save
+```
 验证生产设备，ping 10.0.20.4 10.0.50.5 10.0.4.254 都通
 
 5、配置OSPF，实现车间、办公、生产服务器、基础服务器互通
 
 配置核心
-
+```cmd
 <hexin1>sys
 System View: return to User View with Ctrl+Z.
 [hexin1]ospf
@@ -112,8 +115,9 @@ System View: return to User View with Ctrl+Z.
 [hexin1-ospf-1-area-0.0.0.0]network 10.0.30.0 0.0.0.255
 [hexin1-ospf-1-area-0.0.0.0]network 10.0.50.0 0.0.0.255
 [hexin1-ospf-1-area-0.0.0.0]quit
+```
 配置车间汇聚
-
+```cmd
 <chejianhuiju1>sys
 System View: return to User View with Ctrl+Z.
 [chejianhuiju1]ospf
@@ -122,11 +126,12 @@ System View: return to User View with Ctrl+Z.
 [chejianhuiju1-ospf-1-area-0.0.0.0]network 10.0.20.0 0.0.0.255
 [chejianhuiju1-ospf-1-area-0.0.0.0]network 10.0.50.0 0.0.0.255
 [chejianhuiju1-ospf-1-area-0.0.0.0]quit
+```
 生产设备ping核心通，其他配置类似。
 
 6、配置DHCP服务器
 使用三层交换机搭建DHCP服务器，ping测试
-
+```cmd
 [H3C]hostname dhcp
 [dhcp]int g1/0/1
 [dhcp-GigabitEthernet1/0/1]port link-mode route
@@ -137,8 +142,9 @@ System View: return to User View with Ctrl+Z.
 [dhcp]ping 10.0.0.254
 Ping 10.0.0.254 (10.0.0.254): 56 data bytes, press CTRL_C to break
 56 bytes from 10.0.0.254: icmp_seq=0 ttl=255 time=0.000 ms
+```
 创建DHCP池
-
+```
 [dhcp]dhcp enable
 
 dhcp server ip-pool bangong
@@ -155,8 +161,9 @@ dhcp server ip-pool wuxian
  dns-list 114.114.114.114
  expired day 3
 #
+```
 沿途汇聚、核心都要开启DHCP中继，二层只要有对应VLAN并trunk即可。
-
+```cmd
 [jichuhuiju]dhcp enable
 #
 interface Vlan-interface1002
@@ -167,8 +174,9 @@ interface Vlan-interface1003
  dhcp select relay
  dhcp relay server-address 10.0.0.1
 #
+```
 查看客户端IP，成功获取IP
-
+```cmd
 [dhcp]display dhcp server ip-in-use
 IP address       Client identifier/    Lease expiration      Type
                  Hardware address
@@ -178,25 +186,28 @@ IP address       Client identifier/    Lease expiration      Type
 10.0.3.100       0038-6137-362e-3466-  Jun 28 20:35:31 2021  Auto(C)
                  3864-2e31-3230-362d-
                  4745-302f-302f-31
+```
 7、配置专线，仅办公和无线可以访问
 办公汇聚、无线汇聚、核心、专线静态路由
-
+```cmd
 [wuxianhuiju] ip route-static 10.1.0.0 24 10.0.60.10
 [hexin1]ip route-static 10.1.0.0 24 10.0.90.18
 [zhuanxianwangguan]ip route-static 10.0.2.0 24 10.0.90.15
+```
 测试办公和无线都可以访问专线IP10.1.0.2
 
 8、配置办公和无线能访问外网，但外网无法直接访问内网
 办公汇聚、无线汇聚、核心默认路由，外网网关静态路由
-
+```cmd
 [bangonghuiju]ip route-static 0.0.0.0 0 10.0.30.6
 [wuxianhuiju]ip route-static 0.0.0.0 0 10.0.60.10
 [hexin1]ip route-static 0.0.0.0 0 10.0.10.1
 
 [waibuwangguan]ip route-static 10.0.3.0 24 10.0.10.2
 [waibuwangguan]ip route-static 10.0.2.0 24 10.0.10.2
+```
 配置最简单NAT访问方式Easy IP
-
+```cmd
 [waibuwangguan]acl basic 200
 [waibuwangguan-acl-ipv4-basic-2000]rule 0 permit source 10.0.2.0 0.0.0.255
 [waibuwangguan-acl-ipv4-basic-2000]acl basic 2001
@@ -205,6 +216,7 @@ IP address       Client identifier/    Lease expiration      Type
 [waibuwangguan]int g0/0
 [waibuwangguan-GigabitEthernet0/0]nat outbound 2001
 [waibuwangguan-GigabitEthernet0/0]nat outbound 2000
+```
 办公和无线ping外网1.1.1.2通，外网ping内网不通
 
 9、POE供电
@@ -212,12 +224,13 @@ IP address       Client identifier/    Lease expiration      Type
 
 10、办公人员通过telnet远程管理车间接入交换机
 车间汇聚创建管理vlan2000
-
+```cmd
 [chejianhuiju1]vlan 2000
 [chejianhuiju1-vlan2000]int vlan 2000
 [chejianhuiju1-Vlan-interface2000]ip add 192.168.1.254 24
+```
 车间接入创建管理vlan，开启telnet服务，设置默认路由
-
+```cmd
 <chejianjieru>sys
 System View: return to User View with Ctrl+Z.
 [chejianjieru]vlan 2000
@@ -236,11 +249,13 @@ New local user added.
 [chejianjieru]telnet server enable
 [chejianjieru]save
 [chejianjieru]ip route-static 0.0.0.0 0 192.168.1.254
+```
 核心添加静态路由
-
+```cmd
 [hexin1]ip route-static 192.168.1.0 24 10.0.20.4
+```
 办公人员远程telnet
-
+```cmd
 <bangonghuiju>telnet 192.168.1.2
 Trying 192.168.1.2 ...
 Press CTRL+K to abort
@@ -255,37 +270,42 @@ Connected to 192.168.1.2 ...
 login: admin
 Password:
 <chejianjieru>
+```
 11、配置snmp网络管理协议
 配置向10.0.0.1发送设备信息
-
+```cmd
 snmp-agent
 snmp-agent community write private
 snmp-agent community read public
 snmp-agent sys-info version all
 snmp-agent target-host trap address udp-domain 10.0.0.1 params securityname public v2c
+```
 12、配置监控网络，办公和无线可以访问监控服务器，不可访问摄像头，摄像头仅与监控服务器互相访问
 核心设置静态路由，监控汇聚设置默认路由
-
+```cmd
 [hexin1]ip route-static 10.0.5.0 24 10.0.80.17
 [jiankonghuiju]ip route-static 0.0.0.0 0 10.0.80.16
+```
 在监控汇聚上联接口配置ACL规则，只允许访问10.0.5.1发出，其他禁止，从而达到只允许监控服务器被访问的目的
-
+```cmd
 [jiankonghuiju]acl basic 2000
 [jiankonghuiju-acl-ipv4-basic-2000]rule 0 permit source 10.0.5.1 0
 [jiankonghuiju-acl-ipv4-basic-2000]rule 1 deny
 [jiankonghuiju-acl-ipv4-basic-2000]quit
 [jiankonghuiju]int Ten-GigabitEthernet1/0/49
 [jiankonghuiju-Ten-GigabitEthernet1/0/49]packet-filter 2000 outbound
+```
 测试办公可以ping通10.0.5.1，不能ping通10.0.5.2
 
 13、配置DHCP snooping，防止仿冒攻击
 全局开启dhcp snooping，上联端口启用dhcp信任
-
+```cmd
 [bangongjieru]dhcp snooping enable
 [bangongjieru]interface GigabitEthernet1/0/2
 [bangongjieru]dhcp snooping trust
+```
 14、配置端口隔离，减少接入傻瓜交换机造成的网络风暴，防御ARP攻击
-
+```cmd
 [H3C]port-isolate group 2
 [H3C]int g1/0/1
 [H3C-GigabitEthernet1/0/1]port-isolate enable group 2
@@ -297,3 +317,4 @@ Port isolation group information:
 Group ID: 2
 Group members:
 GigabitEthernet1/0/1          GigabitEthernet1/0/2
+```
