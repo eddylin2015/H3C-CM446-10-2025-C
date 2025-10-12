@@ -1,6 +1,6 @@
 # 小型企业网络思路规划配置分享，H3C HCL模拟器
 
-![A beautiful sunset over the mountains]([sunset.jpg](https://90apt.com/usr/uploads/2021/06/1617891069.png) "Sunset View")
+![](https://90apt.com/usr/uploads/2021/06/1617891069.png)
 
 采用三层网络结构，核心、汇聚三层互联，堆叠采用40G网络，汇聚10G，接入1G，网关下放到汇聚，交换机采用独立管理VLAN。
 
