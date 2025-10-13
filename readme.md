@@ -2,6 +2,8 @@
 
 ## h3c
 
+bcdedit /set hypervisorlaunchtype off
+
 [https://wsso.h3c.com](https://www.h3c.com/en/)
 
 Mbc@123321
