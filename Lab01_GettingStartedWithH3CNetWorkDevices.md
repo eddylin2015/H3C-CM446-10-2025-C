@@ -52,7 +52,7 @@ Cat5 UTP Ethernet Cable   |
 
 
 
-### 實驗保充password-control
+### 補充指令password-control
 解決 telnet 連結時 super 問題.
 ```cmd
 [lmsw]password-control super aging 365
