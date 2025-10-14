@@ -50,6 +50,16 @@ PC                        |
 Console Serial Port Cable |
 Cat5 UTP Ethernet Cable   |
 
+
+
+### 實驗保充password-control
+解決 telnet 連結時 super 問題.
+```cmd
+[lmsw]password-control super aging 365
+[lmsw]password-control super length 4
+[lmsw]password-control length 4
+```
+
 ### MSR36-20 Console-CLI
 
 ```cmd
