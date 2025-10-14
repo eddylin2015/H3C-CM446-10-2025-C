@@ -11,12 +11,13 @@ After completing the Lab, you will be able to:
 
 ## Lab Diagram
 
-Figure 1-1 Lab diagram::
+Figure 1-1 Lab diagram
+```console
          Console Cable          Console port
      COM
   PC                                          Router/Switch 
      Nic     Cable              GigabitEthernet
-
+```
 Equipment and Cable
 
 Item                      |  Version  | Quantity  | Description   
