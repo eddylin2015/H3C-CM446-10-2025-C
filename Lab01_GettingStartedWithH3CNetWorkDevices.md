@@ -18,11 +18,11 @@ Console.WriteLine("└─┘");
 Figure 1-1 Lab diagram
 ```console
          Console Cable          
-  ┌───────┐                     ┌───────────────────────────────┐     
-  │   COM │                     │  Console port
-  │ PC    │                     │                 Router/Switch 
-  │   Nic │    Cable            │  GigabitEthernet
-  └───────┘                     └────────────────────────────────┘   
+  ┌───────┐ ─────────────────── ┌───────────────────────────────┐     
+  │   COM │                     │  Console port                 │
+  │ PC    │                     │                 Router/Switch │
+  │   Nic │    Cable            │  GigabitEthernet              │   
+  └───────┘ ─────────────────── └───────────────────────────────┘   
 ```
 Equipment and Cable
 
