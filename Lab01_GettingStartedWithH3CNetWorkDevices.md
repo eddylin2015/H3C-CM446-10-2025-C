@@ -4,10 +4,10 @@
 
 After completing the Lab, you will be able to:
 
--log in to a device via a console port.
--log in to a device via Telnet
--basic commands to operate a system.
--basic commands to operate a file.
+- log in to a device via a console port.
+- log in to a device via Telnet
+- basic commands to operate a system.
+- basic commands to operate a file.
 
 ## Lab Diagram
 
