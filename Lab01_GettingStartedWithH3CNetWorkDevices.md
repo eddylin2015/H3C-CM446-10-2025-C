@@ -9,17 +9,38 @@ After completing the Lab, you will be able to:
 - basic commands to operate a system.
 - basic commands to operate a file.
 
-## Lab Diagram
+## 真机實驗Lab_1
+
+### 排錯
+
+同學要留意指令版本不同:
+```cmd
+line vty 0 63
+# 改為
+user interface vty 0 63
+```
+### 2010年版交換機H3C S3600V2
+
+![](https://resource.h3c.com/cn/201210/15/20121015_1422015_S3600V2-28TP-EI_755797_30003_0.jpg)
+
+https://www.h3c.com/cn/d_201111/729703_30005_0.htm#aa_3
+
+## HCL 虛擬機實驗 
+
+### Lab_1 Diagram
 
 Figure 1-1 Lab diagram
+
 ```console
-         Console Cable          
-  ┌───────┐ ─────────────────── ┌───────────────────────────────┐     
-  │   COM │                     │  Console port                 │
-  │ PC    │                     │                 Router/Switch │
-  │   Nic │    Cable            │  GigabitEthernet              │   
-  └───────┘ ─────────────────── └───────────────────────────────┘   
+         
+  ┌───────┐    Console Cable    ┌───────────────────────────────┐     
+  │   COM │ ─────────────────── │  Console port                 │
+  │ PC    │                     │        MSR36-20 Router/Switch │
+  │   Nic │ ─────────────────── │  GigabitEthernet              │   
+  └───────┘    Cable            └───────────────────────────────┘
+
 ```
+
 Equipment and Cable
 
 Item                      |  Version  | Quantity  | Description   
@@ -29,23 +50,8 @@ PC                        |
 Console Serial Port Cable |
 Cat5 UTP Ethernet Cable   |
 
-## PC Config
+### MSR36-20 Console-CLI
 
-![](https://90apt.com/usr/uploads/2023/05/3571188184.png)
-
-
-
-
-```cmd
-#
-<H3C>
-<H3C>system-view
-[H3C]interface GigabitEthernet0/1
-[H3C-GigabitEthernet0/1]port link-mode route
-[H3C-GigabitEthernet0/1]combo enable copper
-[H3C-GigabitEthernet0/1]ip address 10.1.1.1 255.255.255.0
-[H3C-GigabitEthernet0/1]q
-```
 ```cmd
 <H3C>
 <H3C>system-view
@@ -72,9 +78,41 @@ New local user added.
 [lmsw]super password role level-15 simple abc1
 [lmsw]header login
 Please input banner content, and quit with the character '%'.
-lm sw %
+Welcome LM SW %
 [lmsw]line vty 0 63
 [lmsw-line-vty0-63]authentication-mode scheme
 [lmsw-line-vty0-63]q
 [lmsw]telnet server enable
+[lmsw]interface GigabitEthernet0/1
+[lmsw-GigabitEthernet0/1]port link-mode route
+[lmsw-GigabitEthernet0/1]combo enable copper
+[lmsw-GigabitEthernet0/1]ip address 10.1.1.1 255.255.255.0
+[lmsw-GigabitEthernet0/1]q
+[lmsw]q
+<lmsw>reboot
+
+display interface brief
+GigabitEthernet0/1 up up
 ```
+
+## PC Telnet實驗
+
+### PC需要設置靜態IP及UP STATUS
+
+![](https://90apt.com/usr/uploads/2023/05/3571188184.png)
+
+## Telnet指令
+```cmd
+[H3C]telnet 10.1.1.1
+Welcome LM SW %
+login:test
+password:abc1
+<lmsw>super
+password:abc1
+<lmsw>sys
+[lmsw]display interface brief
+GigabitEthernet0/1 up up 
+```
+## 總結
+
+完成LAB1.
