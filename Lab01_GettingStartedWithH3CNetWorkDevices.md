@@ -34,6 +34,8 @@ Cat5 UTP Ethernet Cable   |
 ![](https://90apt.com/usr/uploads/2023/05/3571188184.png)
 
 
+
+
 ```cmd
 #
 <H3C>
@@ -58,13 +60,16 @@ Please input the file name(*.cfg)[flash:/startup.cfg]
 flash:/startup.cfg exists, overwrite? [Y/N]:Y
 Validating file. Please wait...
 Configuration is saved to device successfully.
+[lmsw]password-control super aging 365
+[lmsw]password-control super length 4
+[lmsw]password-control length 4
 [lmsw]local-user test
 New local user added.
-[lmsw-luser-manage-test]password simple 123456789a
+[lmsw-luser-manage-test]password simple abc1
 [lmsw-luser-manage-test]service-type telnet
 [lmsw-luser-manage-test]authorization-attribute user-role level-0
 [lmsw-luser-manage-test]q
-[lmsw]super password role level-15 simple 123456789a
+[lmsw]super password role level-15 simple abc1
 [lmsw]header login
 Please input banner content, and quit with the character '%'.
 lm sw %
