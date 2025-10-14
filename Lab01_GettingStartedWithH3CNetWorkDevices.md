@@ -11,10 +11,6 @@ After completing the Lab, you will be able to:
 
 ## Lab Diagram
 
-Console.WriteLine("┌─┐");
-Console.WriteLine("│1│");
-Console.WriteLine("└─┘");
-
 Figure 1-1 Lab diagram
 ```console
          Console Cable          
