@@ -41,3 +41,14 @@ ip add 192.168.2.1 24
 interface G0/0
 ip add 192.168.1.2 30
 ```
+## Commands Used in the Lab
+
+Command | Description
+--------|--------------
+ip add|configure an ip address
+iproute-static|configure a static route
+ping|check connectivity
+tracert|check a route
+terminal monitor|enable the system monitoring function
+terminal debugging|Enable the debugging information display function
+debugging|Enable the debugging switch of a specified module.
