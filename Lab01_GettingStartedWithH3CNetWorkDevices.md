@@ -11,15 +11,22 @@ After completing the Lab, you will be able to:
 
 ## 真机實驗Lab_1
 
-### 排錯
+### 實驗指令
 
-同學要留意指令版本不同:
+putty
+
+- text
+- control-h  control-?
+- serial com1-3
+
+指令參考HCL虛擬機實驗, 留意指令版本不同:
 ```cmd
 line vty 0 63
 # 改為
 user interface vty 0 63
 ```
-### 2010年版交換機H3C S3600V2
+
+2011年版交換機H3C S3600V2
 
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/figure100.png.jpg?raw=true)
 
@@ -102,8 +109,7 @@ Welcome LM SW %
 [lmsw-GigabitEthernet0/1]q
 [lmsw]q
 <lmsw>reboot
-
-display interface brief
+<lmsw>display interface brief
 GigabitEthernet0/1 up up
 ```
 
