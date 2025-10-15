@@ -21,7 +21,7 @@ user interface vty 0 63
 ```
 ### 2010年版交換機H3C S3600V2
 
-![]([https://resource.h3c.com/cn/201210/15/20121015_1422015_S3600V2-28TP-EI_755797_30003_0.jpg](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/figure100.png.jpg?raw=true)
+![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/figure100.png.jpg?raw=true)
 
 參考指令
 
