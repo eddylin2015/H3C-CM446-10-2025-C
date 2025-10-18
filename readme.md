@@ -12,15 +12,15 @@ Mbc@123321
 
 H3C Certified Network Engineer for Routing &amp; Switching Plus(H3CNE-RS+)
 
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	StudyGuide	Part I Computer Network Fundamentals	Read Online
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	StudyGuide	Part II Getting Started with H3C Network Devices	Read Online
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	StudyGuide	Part III LAN Switching	Read Online
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	StudyGuide	Part IV Advanced Knowledge About TCPIP	Read Online
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	StudyGuide	Part V Configuring IP Routing	Read Online
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	StudyGuide	Part VI Configuring Secure Branch Network	Read Online
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	StudyGuide	Part VII WAN Access and Interconnection	Read Online
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	StudyGuide	Part VIII The Evolution of Network Technologies	Read Online
-- H3C Certified Network Engineer for Routing & Switching Plus(H3CNE-RS+)	LabGuide	H3CNE-RS+ Routing and Switching Essentials V1.0 Lab Guide	Read Online
+- I Computer Network Fundamentals
+- II Getting Started with H3C Network Devices	
+- III LAN Switching	
+- IV Advanced Knowledge About TCPIP	
+- V Configuring IP Routing	
+- VI Configuring Secure Branch Network	
+- VII WAN Access and Interconnection	
+- VIII The Evolution of Network Technologies	
+- LabGuide	H3CNE-RS+ Routing and Switching Essentials V1.0 Lab Guide
 
 ## timetable
 
