@@ -1,5 +1,7 @@
 # CM446-10-2025-c 4522
 
+H3C认证路由交换网络工程师（H3CNE-RS+）
+
 ## h3c
 
 bcdedit /set hypervisorlaunchtype off
@@ -7,6 +9,10 @@ bcdedit /set hypervisorlaunchtype off
 [https://wsso.h3c.com](https://www.h3c.com/en/)
 
 Mbc@123321
+
+[https://c.h3c.com](https://c.h3c.com/en/)
+
+[中文讲义](https://www.h3c.com/cn/BizPortal/TrainingPartner/TeachingMaterial/TeachingMaterialCertification.aspx)
 
 ## EBook
 
@@ -21,6 +27,16 @@ H3C Certified Network Engineer for Routing &amp; Switching Plus(H3CNE-RS+)
 - VII WAN Access and Interconnection	
 - VIII The Evolution of Network Technologies	
 - LabGuide	H3CNE-RS+ Routing and Switching Essentials V1.0 Lab Guide
+
+- 第1篇_计算机网络基础	
+- 第2篇_H3C网络设备操作入门	
+- 第3篇_配置局域网交换	
+- 第4篇_高级TCPIP知识	
+- 第5篇_IP路由	
+- 第6篇_构建安全的分支网络	
+- 第7篇_广域网接入和互连	
+- 第8篇_网络技术发展	
+- 实验指导书	路由交换技术基础_实验指导书
 
 ## timetable
 
