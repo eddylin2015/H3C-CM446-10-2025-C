@@ -73,3 +73,6 @@ tracert|check a route
 terminal monitor|enable the system monitoring function
 terminal debugging|Enable the debugging information display function
 debugging|Enable the debugging switch of a specified module.
+
+總結
+完成LAB2.
