@@ -59,7 +59,7 @@ disp ip routing-table
 <RTB>terminal monitor
 <RTB>terminal debugging
 <RTB>debugging ip icmp
-<T
+<RTB>undo debugging all
 ```
 
 ## Commands Used in the Lab
