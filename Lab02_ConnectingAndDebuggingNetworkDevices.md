@@ -41,6 +41,27 @@ ip add 192.168.2.1 24
 interface G0/0
 ip add 192.168.1.2 30
 ```
+```cmd
+disp ip routing-table
+[RTA]ip route-static 192.168.2.0 255.255.255.0 192.168.1.2
+```
+```cmd
+[RTB]ip route-static 192.168.0.0 255.255.255.0 192.168.1.1
+```
+## tracert enable cmd
+```cmd
+[RTA]ip unreachables enable
+[RTA]ip ttl-expires enable
+```
+## debuggin
+
+```cmd
+<RTB>terminal monitor
+<RTB>terminal debugging
+<RTB>debugging ip icmp
+<T
+```
+
 ## Commands Used in the Lab
 
 Command | Description
