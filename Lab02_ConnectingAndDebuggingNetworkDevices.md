@@ -11,7 +11,7 @@ After completing the Lab, you will be able to:
 ## Lab Diagram
 
 Figure 2-1 Lab diagram
-![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/figure201labdiagram.png?raw=true)
+![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/figure201labdiagram.png?raw=true)
 
 ## Lab Procedure
 
