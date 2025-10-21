@@ -2,11 +2,16 @@
 
 ## Purpose
 
+- Understand the basic principle of STP.
+- Master the basic method of config STP.
+
 ## Lab Diagram
 
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/hcl_aefc21344210.png?raw=true)
 
 ## Lab Process
+
+
 
 ## cmd list
 
