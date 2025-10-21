@@ -10,5 +10,12 @@
 
 ## cmd list
 
+- stp global enable
+- stp mode {mstp| pvst| rstp| stp}
+- stp [instance instance-list|vlan vlan-id-list] priority priority
+- stp edged-port
+- disp stp [instance instance-list|vlan vlan-id-list] [interface interface-list|slot slot-number] [brief]
+
+
 ## 結語:
 
