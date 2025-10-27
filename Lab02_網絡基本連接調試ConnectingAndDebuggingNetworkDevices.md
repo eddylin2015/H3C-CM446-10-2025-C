@@ -1,4 +1,4 @@
-# Lab 2 connecting and Debugging Network Devices
+# Lab 2 網絡基本連接調試 connecting and Debugging Network Devices
 
 ## Purpose
 
