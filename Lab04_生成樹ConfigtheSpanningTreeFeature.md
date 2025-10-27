@@ -1,4 +1,4 @@
-# lab4 Config the Spanning Tree Feature
+# lab4 生成樹Config the Spanning Tree Feature
 
 ## Purpose
 
@@ -24,3 +24,4 @@
 
 ## 結語:
 
+完成
