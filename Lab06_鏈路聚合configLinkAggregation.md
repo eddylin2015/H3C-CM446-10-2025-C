@@ -4,6 +4,10 @@
 - Link-Aggregatoin basic
 - Link-Aggregatoin config
 
+## Lab Diagram
+
+![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/hcl_ab7a55429965.png?raw=true)
+
 ## Task1
 
 ## cmd list
@@ -12,4 +16,5 @@
 
 ## 總結
 完成
+
 
