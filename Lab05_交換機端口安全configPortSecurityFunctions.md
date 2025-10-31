@@ -21,9 +21,20 @@
 
 ```
 ### TASK2
+```cmd
+[SWA]port-isolate group 1
+[SWA-G1/0/1]port-isolate enable group 1
+[SWA-G1/0/2]port-isolate enable group 1
+<SWA>disp port-isolate group 1
+```
+- PCA 172.16.0.1/24
+- PCB 172.16.0.2/24
 
 ## CMD LIST
-
+- dot1x
+- port-isolate group
+- port-isolate enable group-num
+- display port-isolate group
 ## 思考題
 
 ## 總結
