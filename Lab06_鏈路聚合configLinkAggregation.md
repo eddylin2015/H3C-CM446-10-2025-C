@@ -87,7 +87,9 @@ interface GigabitEthernet1/0/24
 
 ```
 ## cmd list
-
+- interface bridge-aggregation interface-num
+- port link-aggregation group number
+- disp link-aggregation summary
 ## 思考題
 
 ## 總結
