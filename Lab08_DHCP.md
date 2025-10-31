@@ -73,6 +73,22 @@ interface GigabitEthernet0/0
  [RTA]disp dhcp server free-ip
 ```
 
+## cmd list
+
+- dhcp enable
+- network net-add [mask-len|mask]
+- gateway-list ip-add
+- dhcp server forbidden-ip low-ip-add [high-ip-add]
+- dhcp server ip-pool pool-name
+- dhcp relay server-group group-id ip ip-add
+- dhcp select relay
+- dhcp relay server-add ip-add
+- disp dhcp sever free-ip
+- disp dhcp sever forbidden-ip
+- disp dhcp sever statistics
+- disp dhcp relay server-add [interface interface-type - interface-num]
+- disp dhcp relay statistics [interface interface-type - interface-num]
+
 ## 總結
 
 完成
