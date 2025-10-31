@@ -1,20 +1,25 @@
 # CM446-10-2025-c 4522
 
+学习笔记，没能详细记录,后面补齐.
+课程进度到达一半,记录文档严重落后,要加油!
+
+## 课程
+
 H3C认证路由交换网络工程师（H3CNE-RS+）
 
 H3C Certified Network Engineer for Routing &amp; Switching Plus(H3CNE-RS+)
 
 ## 大纲
 
-- 第1篇_计算机网络基础	Computer Network Fundamentals
+- 第1篇_计算机网络基础 Computer Network Fundamentals
 - 第2篇_H3C网络设备操作入门	Getting Started with H3C Network Devices	
-- 第3篇_配置局域网交换	LAN Switching	
-- 第4篇_高级TCPIP知识	Advanced Knowledge About TCPIP	
-- 第5篇_IP路由	Configuring IP Routing	
-- 第6篇_构建安全的分支网络	Configuring Secure Branch Network
-- 第7篇_广域网接入和互连	WAN Access and Interconnection	
-- 第8篇_网络技术发展	The Evolution of Network Technologies	
-- 实验指导书	路由交换技术基础 H3CNE-RS+ Routing and Switching Essentials V1.0 Lab Guide
+- 第3篇_配置局域网交换 LAN Switching	
+- 第4篇_高级TCPIP知识 Advanced Knowledge About TCPIP	
+- 第5篇_IP路由 Configuring IP Routing	
+- 第6篇_构建安全的分支网络 Configuring Secure Branch Network
+- 第7篇_广域网接入和互连 WAN Access and Interconnection	
+- 第8篇_网络技术发展 The Evolution of Network Technologies	
+- 实验指导书 路由交换技术基础 H3CNE-RS+ Routing and Switching Essentials V1.0 Lab Guide
 
 ## 章节小结
 
