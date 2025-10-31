@@ -151,13 +151,51 @@ First, estabish the lab environment as illutrted in the lab diagram.Then,configu
 
 ### step2
 ```cmd
-[RTA]interface g0/0
-[RTA-GigabitEthernet0/0]ip address 20.0.0.124
-[RTA-GigabitEthernet0/0]interface go/1
-[RTA-GigabitEthernet0/1]ip address 10.0.0.124
+[RTA]interface G0/0
+[RTA-GigabitEthernet0/0]ip address 20.0.0.1 24
+[RTA-GigabitEthernet0/0]interface G0/1
+[RTA-GigabitEthernet0/1]ip address 10.0.0.1 24
+[RTA-GigabitEthernet0/1]interface loopback 0
+[RTA-Loopback0]ip address 1.1.1.1 32
+[RTA-Loopback0]quit
+[RTA]router id 1.1.1.1
+[RTA]ospf 1
+[RTA-ospf-1]area 0.0.0.0
+[RTA-ospf-1-area-0.0.0.0]network 1.1.1.1 0.0.0.0
+[RTA-ospf-1-area-0.0.0.0]network 10.0.0.0 0.0.0.255
+[RTA-ospf-1-area-0.0.0.0]network 20.0.0.0 0.0.0.255
+
+[RTB]interface G0/0
+[RTB-GigabitEthernet0/0]ip address 20.0.0.2 24
+[RTB-GigabitEthernet0/0]interface G0/1
+[RTB-GigabitEthernet0/1]ip address 10.0.0.2 24
+[RTB-GigabitEthernet0/1]interface loopback 0
+[RTB-Loopback0]ip address 2.2.2.2 32
+[RTB-Loopback0]quit
+[RTB]router id 2.2.2.2
+[RTB]ospf 1
+[RTB-ospf-1]area 0.0.0.0
+[RTB-ospf-1-area-0.0.0.0]network 2.2.2.2 0.0.0.0
+[RTB-ospf-1-area-0.0.0.0]network 10.0.0.0 0.0.0.255
+[RTB-ospf-1-area-0.0.0.0]network 20.0.0.0 0.0.0.255
 ```
 ### step3
+```cmd
+[RTA]disp ospf peer
+[RTA]disp ospf routing
+[RTA]disp ip routing-table
+```
 ### step4
+```cmd
+[RTA]interface G0/0
+[RTA interface G0/0]ospf cost 150
+```
+### step5
+```cmd
+[RTA]disp ospf routing
+[RTA interface G0/0]disp ip routing-table
+
+```
 ### step5
 ### step6
 
