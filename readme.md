@@ -1,7 +1,6 @@
 # CM446-10-2025-c 4522
 
-学习笔记，没能详细记录,后面补齐.
-课程进度到达一半,记录文档严重落后,要加油!
+学习笔记，课程进度到达一半,记录文档严重落后,未能详细记录,完善中.
 
 ## 课程
 
@@ -23,10 +22,22 @@ H3C Certified Network Engineer for Routing &amp; Switching Plus(H3CNE-RS+)
 
 ## 章节小结
 
+### 第2篇_H3C网络设备操作入门	Getting Started with H3C Network Devices	
+
+- system-view 
+- ip-addr
+- telnet
+- disp interf brief
+
 ### 第3篇_配置局域网交换	LAN Switching	
+### 第4篇_高级TCPIP知识 Advanced Knowledge About TCPIP	
 
 - VLAN（access/trunk)
-  
+- Aggregation
+- STF
+- ARP
+- DHCP Relay
+ 
 ### 第5篇_IP路由	Configuring IP Routing	
 
 - direct/static/Dynamic(OSPF)
