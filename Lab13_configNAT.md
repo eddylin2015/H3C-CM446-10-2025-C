@@ -254,9 +254,6 @@ Protocol: ICMP (1)
 State: ICMP REPLY
 Application: OTHER
 420 bytes
-420 bytes
-1@mail.mbc. edu. mo
-lammou@mail.mbc.edu. mo
 Start time: 2014-11-13 10:19:09 TTL: 22s
 Interface(in) : GigabitEthernet0/0
 Interface (out): GigabitEthernet0/1
@@ -265,8 +262,7 @@ Responder->Initiator:
 4 packets
 4 packets
 336 bytes
-336 bytes ammou@mail.mbc.edu. mo
-I ammo
+336 bytes 
 Total sessions found: 2
 Based on the previous information, the source IP addresses 10.0.0.1 and 10.0.0.2 are
 converted to the same public network address 198.76.28.11. But, the port for 10.0.0.1 is
@@ -295,7 +291,6 @@ Step 3 Configure Easy IP. edu. mo
 # Define flow with the source address located in the network segment 10.0.0.0/24
 using ACLS.
 Configure Easy IP on the RTA.
-u@mal
 [RTA-acl-ipv4-basic-20001 rule 0 permit source 10.0.0.0 0.0.0.255
 [RTA]acl number 2000
 # Bind the acl 2000 with a port and deliver NAT.
@@ -320,16 +315,13 @@ Destination IP/port: 198.76.28.1/0
 DS-Lite tunnel peer:-
 VPN instance/VLAN ID/VLL ID: -1-1-
 Protocol: ICMP(1)
-State: ICMP REPLY lammou
-ammou@mail.mbc.edu. mo
-lammou@mail.mbc. edu. mo
+State: ICMP REPLY 
 Application: OTHER
 Start time: 2014-11-13 10:24:56 TTL: 15s
 Interface(in) : GigabitEthernet0/0
 Interface (out): GigabitEthernet0/1
 Initiator->Responder: 5 packets
 Responder->Initiator: 5 packets
-420 bytes
 420 bytes
 Initiator:
 Source IP/port: 10.0.0.2/219
@@ -349,10 +341,7 @@ Application: OTHER
 Start time: 2014-11-13 10:24:59 TTL: 19
 Interface(in) : GigabitEthernet0/0
 Interface (out): GigabitEthernet0/1
-nOnitiator->Responder: Tammo
-bu@mai
-lanmou@mai
-@mail.mbc. edu. mo
+nOnitiator->Responder: 
 5 packets 420 bytes
 Responder->Initiator: 5 packets 420 bytes
 Total sessions found: 2
@@ -361,8 +350,6 @@ There are currently 2 NAT sessions:
 Protocol GlobalAddr Port InsideAddr Port DestAddr Port
 TCMP 198.76.28.1 12290 10.0.0.1 1024 198.76.29.4 1024
 ICMP 198.76.28.1 12289 10.0.0.2 512 198.76.29.4 512
-lammou@mail.mbc.edu. mo
-edu. mo
 Based on the previous information, the source IP addresses 10.0.0.1 and 10.0.0.2 have
 been converted to the outbound port address 198.76.28.1 of the RTA.
 After the NAT configuration, if the Client_A can ping the server, can the server ping the
@@ -373,9 +360,6 @@ Request timeout.
 Request timeout.
 Request timeout.
 Request timeout.
-lammo
-mo
-lammou
 Packets: sent = 4, received = 0, lost = 4 (100% lost),
 Ping statistics of 10.0.0.1:
 The server cannot ping the Client_A.Why? edu. mo
@@ -385,7 +369,7 @@ the destination address. The actual source address of Client_A is 10.0.0.1. That
 ICMP connection must be initiated by the Client_A, triggering the RTA to convert addresses
 and forward packets. Note that NAT is effective to the RTA outbound port Eth 0/1, so
 sending ICMP packets from the server to ping the client cannot trigger the RTA to convert
-addresses. Lamm
+addresses. 
 To know how to ping the Client_A on the server, go to task 4.
 Step 6 Restore the configuration.
 Delete the Easy IP configuration on the RTA.
@@ -400,9 +384,7 @@ the Client_A.
 Step 1 Check connectivity.
 Step 2 Configure NAT Server.
 Configure NAT Server on the RTA.
-ammo
-[RTB]interface GigabitEthernet 0/1 @mail
-@mail. m
+[RTB]interface GigabitEthernet 0/1 
 #Implement one-to-one NAT mapping for the private network server address and public
 network address on the outbound port.
 [RTB-GigabitEthernet0/1]nat server protocol icmp global 198.76.28.11 inside
@@ -426,14 +408,11 @@ Check the NAT Server entries on the RTА.
 [RTA]display nat session verbose
 Initiator:
 Source IP/port: 198.76.29.4/236
-mou@mail.mbc. edu. mo
-lammou@mail.mbc. edu. mo
 Destination IP/port: 198.76.28.11/2048
 DS-Lite tunnel peer: -
 VPN instance/VLAN ID/VLL ID: -/-/-
 Protocol: ICMP (1)
 Responder:
-lammo
 Source IP/port: 10.0.0.1/236
 Destination IP/port: 198.76.29.4/0
 DS-Lite tunnel peer:
@@ -442,7 +421,7 @@ Protocol: ICMP(1)
 State: ICMP REPLY
 Application: OTHER
 Start time: 2014-11-13 10:31:45 TTL: 26s
-Interface(in) : GigabitEthernet0/1 lammou@mail.mbc.edu. mo
+Interface(in) : GigabitEthernet0/1 
 Interface (out): GigabitEthernet0/0
 Initiator->Responder: 5 packets
 Responder->Initiator: 5 packets
@@ -453,11 +432,7 @@ Total sessions found: 1
 Server in private network information:
 There are currently 1 internal servers
 Interface: GigabitEthernet0/1, Protocol:1(icmp),
-[global] 198.76.28.11: ---- [local]
-lanmou@mai
-10.0.0.1:
-edu. mo
-edu. mo
+[global] 198.76.28.11: ---- [local]10.0.0.1:
 Based on the previous information, the public network address maps to the private network
 address one by one.
 Step 5 Restore the configuration.
@@ -474,13 +449,13 @@ Client_B pings the server, can the ping be successfully as well? amm
 Based on the NAT Server configuration command on the RTA, if the Client_A is an FTP
 server, can it provide FTP services externally? The answer is yes. Modify the NAT Server
 configuration. The NAT Server configuration is as follows:
-mbc.
 [RTB-GigabitEthernet0/1]nat server protocol tcp global 198.76.28.11 ftp inside
 10.0.0.1 ftp
 [RTB]interface GigabitEthernet 0/1
-
+```
 
 ## command reference
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab13commandreference.png?raw=true)
+
 
 
