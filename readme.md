@@ -22,14 +22,14 @@ H3C Certified Network Engineer for Routing &amp; Switching Plus(H3CNE-RS+)
 
 ## 章节小结
 
-### 第2篇_H3C网络设备操作入门	Getting Started with H3C Network Devices	
+### 第2篇_H3C网络设备操作入门 Getting Started with H3C Network Devices	
 
 - system-view 
 - ip-addr
 - telnet
 - disp interf brief
 
-### 第3篇_配置局域网交换	LAN Switching	
+### 第3篇_配置局域网交换 LAN Switching	
 ### 第4篇_高级TCPIP知识 Advanced Knowledge About TCPIP	
 
 - VLAN（access/trunk)
