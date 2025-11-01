@@ -114,9 +114,7 @@ RemoteMAC LocalMAC State
 ```
 When the PPPoE client accesses the router via PPPoE, the client can display all DHCP
 address binding information on the PPPoE server through the following command.
-Bundle ID Interface
-
-1 GE0/0
+Bundle ID Interface1 GE0/0
 ```cmd
 [Server] display dhcp server ip-in-use
 ```
@@ -125,16 +123,15 @@ Hardware address
 1.1.1.2 0039-3636-312e-6436- Unlimited Auto (C)
 3739-2e30-6130- 352d6666-6666-6666-6666
 
-Hence, it is known that the public network IP address assigned to the PPPoE client is
-1.1.1.2.
-Step 3 Configure the NAT.
+Hence, it is known that the public network IP address assigned to the PPPoE client is 1.1.1.2.
+### Step 3 Configure the NAT.
 For dial-up access, the public network IP address is dynamically assigned by the ISP. It
 cannot be determined beforehand and cannot be translated by the standard network
 address and port translation (NAPT). Easy IP applies to dial-up access to the Internet or
 dynamic acquisition of an IP address.
 Define a flow with the source address belonging to the 10.0.0.0/24 network segment via
 ACL.
-ammoy
+
 ```cmd
 [Client-acl-ipv4-basic-2000] rule 0 permit source 192.168.0.0 0.0.0.255
 [Client]acl basic 2000
@@ -215,5 +212,4 @@ Total sessions found: 2
 ```
 ## command reference
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab14commandreference.png?raw=true)
-
 
