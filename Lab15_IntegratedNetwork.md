@@ -15,7 +15,8 @@ Figure 15-9 Headquarter topology
 
 1) Name and add a port description for each device according to the previous naming plan
 and port description. Take MSR3620 as an example:
-# Enter the interconnect port and add the port description as per the design requirements
+
+Enter the interconnect port and add the port description as per the design requirements
 ```cmd
 [H3C] sysname BJ-MSR3620-0
 [BJ-MSR3620-0] interface Ten-GigabitEthernet 0/0
@@ -33,7 +34,8 @@ Configure the core switch BJ-S6520XE-0:
 [BJ-S6520XE-0-Ten-GigabitEthernet1/0/2] port link-aggregation group 1
 ```
 Configure the server area switch BJ-S5560X-0:
-# Create the manual aggregation group 1 and add XG1/0/19 and XG1/0/20 to the group
+
+Create the manual aggregation group 1 and add XG1/0/19 and XG1/0/20 to the group
 ```cmd
 [BJ-S5560X-0] interface Bridge-Aggregation 1
 [BJ-S5560X-0] interface Ten-GigabitEthernet 1/0/19
@@ -62,22 +64,21 @@ BAGG1 S None 2 이 0 Shar
 access switch, and configure the uplink interface as a trunk link to allow the relevant
 VLAN to pass through. Here we use BJ-S5130-0 as an example. Refer to the following
 configurations for other accessswitches:
-# Create VLAN 10 and VLAN 20. Assign ports G1/0/1 to G1/0/30 to VLAN 10, and ports ammou@ma
-G1/0/31 to G1/0/48 to VLAN 20
+
+Create VLAN 10 and VLAN 20. Assign ports G1/0/1 to G1/0/30 to VLAN 10, and ports G1/0/31 to G1/0/48 to VLAN 20
 ```cmd
 [BJ-S5130-0] vlan 10
 [BJ-S5130-0-vlan10] port GigabitEthernet 1/0/1 to GigabitEthernet 1/0/30
 [BJ-S5130-0-vlan10] vlan 20
 [BJ-S5130-0-vlan20]port GigabitEthernet 1/0/31 to GigabitEthernet 1/0/48 mbc.edu. mo
 ```
-# To reduce STP traffic flood and frequent convergence due to topology changes, set the
+To reduce STP traffic flood and frequent convergence due to topology changes, set the
 switch ports directly connected to the terminal as edge ports to improve network quality
 ```cmd
 [BJ-S5130-0] interface range GigabitEthernet 1/0/1 to GigabitEthernet 1/0/48
 [BJ-S5130-0-if-range] stp edged-port 
 ```
-# Set the type of uplink port G1/0/49 as trunk and allow VLAN 10 and VLAN 20 to pass
-through
+Set the type of uplink port G1/0/49 as trunk and allow VLAN 10 and VLAN 20 to pass through
 ```cmd
 [BJ-S5130-0] interface Ten-GigabitEthernet 1/0/49 1. mo
 [BJ-S5130-0-Ten-GigabitEthernet1/0/49] port link-type trunk
@@ -86,13 +87,15 @@ through
 4) To enable the communication between VLANs, configure an IP address for each VLAN
 on the core switch BJ-S6520XE-0 and enable inter-VLAN routing. See the previous
 plan for specific IP addresses.
-# Enter the L3 virtual interface of VLAN 10 and configure the IP address for the L3 interface
+
+Enter the L3 virtual interface of VLAN 10 and configure the IP address for the L3 interface
 ```cmd
 [BJ-S6520XE-0] vlan 10
 [BJ-S6520XE-0-vlan10] interface vlan 10
 [BJ-S6520XE-0-Vlan-interface10] ip address 192.168.1.254 24
 ```
-# Enter the L3 virtual interface of VLAN 20 and configure the IP address for the L3 interface
+
+Enter the L3 virtual interface of VLAN 20 and configure the IP address for the L3 interface
 ```cmd
 [BJ-S6520XE-0-Vlan-interface10] vlan 20
 [BJ-S6520XE-0-vlan20] interface vlan 20 mo
@@ -109,8 +112,11 @@ plan for specific IP addresses.
 If a DIY device is used in H3C HCL for the experiment, the VLAN port of the device is in the
 down state by default. Therefore, you need to enter the VLAN interface view and use the
 undo shutdown command to set the port state to up.
+
+
 Note:
-# Configure the downlink ports XG1/0/3, XG1/0/5 and XG1/0/7 connecting the core switch
+
+Configure the downlink ports XG1/0/3, XG1/0/5 and XG1/0/7 connecting the core switch
 and the access switch, configure the type of port aggregation group 1 as trunk, and
 configure the VLAN as planned.
 ```cmd
@@ -133,8 +139,8 @@ address of the PC to the IP address of the VLAN.
 5) According to the previous plan, it is necessary to configure the DHCP protocol on the
 core switch and assign an IP address to each PC. The configuration commands are as
 follows.
-# Enable the DHCP function
-# Create the DHCP address pool corresponding to VLAN 10, and specify the gateway
+Enable the DHCP function
+Create the DHCP address pool corresponding to VLAN 10, and specify the gateway
 ```cmd
 [BJ-S6520XE-0] dhcp enable
 address and DNS server address
@@ -170,11 +176,13 @@ ipconfig command to view the details of the local IP address.
 the management VLAN and the access switch BJ-S5560X-0 is used. For other
 switches, the configurations of this part are the same.
 BJ-S6520XE-0 switch:
-# Enter the L3 virtual interface of VLAN 1 and configure the IP address for the L3 interface
+
+Enter the L3 virtual interface of VLAN 1 and configure the IP address for the L3 interface
 ```cmd
 [BJ-S6520XE-0] interface vlan 1
 [BJ-S6520XE-0-Vlan-interface1] ip address 192.168.0.25 29
-# Configure the IP address for the VLAN 1 L3 interface, configure the routing to the upperayer switch, and point the next hop to the management address of the core switch
+
+Configure the IP address for the VLAN 1 L3 interface, configure the routing to the upperayer switch, and point the next hop to the management address of the core switch
 BJ-S5560X-0 switch:
 [BJ-S5560X-0] interface vlan 1
 [BJ-S5560X-0-Vlan-interface1] ip address 192.168.0.26 29
@@ -194,7 +202,8 @@ SWITCH
 XG1/0/49
 SZ-S5130-0
 Name the device and add the port description.
-# Enter each interconnect port of the MSR3620 and add the port description as per the
+
+Enter each interconnect port of the MSR3620 and add the port description as per the
 design requirements
 ```cmd
 [H3C] sysname SZ-MSR3620-0
@@ -209,7 +218,8 @@ requirements
 2) Configure the DHCP.
 In the Shenzhen office, assign IP addresses to PCs accessed with the DHCP mode, and
 use the MSR3620 router as the DHCP server. The specific configurations are as follows:
-# Configure the XGO/0 interface with an IP address that is the gateway for all PCs on the
+
+Configure the XGO/0 interface with an IP address that is the gateway for all PCs on the
 internal network
 ```cmd
 [SZ-MSR3620-0] interface Ten-GigabitEthernet 0/0
@@ -228,11 +238,12 @@ assignment
 [SZ-MSR3620-0-dhcp-pool-pool1] forbidden-ip 192.168.5.250
 ```
 3) Configure the management address of the switch. 
-# Enter the L3 virtual interface of VLAN 1 and configure the IP address for the L3 interface
+Enter the L3 virtual interface of VLAN 1 and configure the IP address for the L3 interface
 ```cmd
 [SZ-S5130-0] interface vlan 1
 [SZ-S5130-0-Vlan-interface1] ip address 192.168.5.250 24
-# Configure the routing to the upper-layer router and points the next hop to the router
+
+Configure the routing to the upper-layer router and points the next hop to the router
 [SZ-S5130-0-Vlan-interface1] quit
 interface address
 [SZ-S5130-0] ip route-static 0.0.0.0 0 192.168.5.254
@@ -251,13 +262,14 @@ SH-S5130-0
 WITO
 Name the device and add the port description.
 SH-MSR3620-0 router:
-# Enter each interconnect port and add the port description as per the design requirements
+Enter each interconnect port and add the port description as per the design requirements
 ```cmd
 [H3C] sysname SH-MSR3620-0
 [SH-MSR3620-0] interface Ten-GigabitEthernet 0/0
 [SH-MSR3620-0-Ten-GigabitEthernet0/0] description Link-To-SH-S5130-0-XGE1/0/49
 SH-S5130-0 switch:
-# Enter each interconnect port and add the port description as per the design requirements
+
+ Enter each interconnect port and add the port description as per the design requirements
 [H3C] sysname SH-S5130-0
 [SH-S5130-0] interface Ten-GigabitEthernet 1/0/49
 [SH-S5130-0-Ten-GigabitEthernet1/0/49] description Link-To-SH-XGE0/O
@@ -267,7 +279,8 @@ In the Shanghai research institute, assign IP addresses to PCs accessed with the
 mode, and use MSR3620 router as the DHCP server. Please fill in the blanks below with
 the specific DHCP configurations:
 O
-# Configure the XGO0/0 interface with an IP address that is the gateway for all PCs on the
+
+Configure the XGO0/0 interface with an IP address that is the gateway for all PCs on the
 internal network
 ```cmd
 [SH-MSR3620-0] interface Ten-GigabitEthernet 0/0
@@ -328,7 +341,8 @@ planned
 [SZ-MSR3620-0-GigabitEthernet0/1] description Link-To-BJ-MSR3620-0-G0/2
 [SZ-MSR3620-0-GigabitEthernet0/1] ip address 192.168.0.6 30
 ```
-# Add the description of GO/1 interface, and configure IP address of the GO/1 interface as
+
+Add the description of GO/1 interface, and configure IP address of the GO/1 interface as
 3) Configure the SH-MSR3620-0.
 planned
 ```cmd
@@ -404,13 +418,14 @@ ed
 # Release the loopback interface address (as the network management address) to
 facilitate the management
 [BJ-MSR3620-0-ospf-1-area-0.0.0.1] network 192.168.0.17 0.0.0.0
-# Create and enter area 0, and release the network segments interconnected with the SZMSR3620-0 and SH-MSR3620-0
+
+Create and enter area 0, and release the network segments interconnected with the SZMSR3620-0 and SH-MSR3620-0
 [BJ-MSR3620-0-ospf-1] area 0
 [BJ-MSR3620-0-ospf-1-area-0.0.0.0] network 192.168.0.4 0.0.0.3
 [BJ-MSR3620-0-ospf-1-area-0.0.0.0] network 192.168.0.8 0.0.0.3
 ```
 3) According to the previous routing plan, configure the OSPF protocol of the SZMSR3620-0.
-# Create and enter the loopback 0 interface, configure the IP address of the interface (note
+Create and enter the loopback 0 interface, configure the IP address of the interface (note
 that the mask has 32 bits), and specify the router ID manually
 ```cmd
 [SZ-MSR3620-0] interface loop 0
@@ -444,8 +459,7 @@ of the Shanghai research institute
 # Release the loopback address (as the network management address)
 [SH-MSR3620-0-ospf-1-area-0.0.0.3] network 192.168.0.19 0.0.0.0
 ```
-5) Configure a routing on the egress router for the headquarter and branch offices to
-# Configure a default routing, point the next hop to the gateway address provided by the
+5) Configure a routing on the egress router for the headquarter and branch offices toConfigure a default routing, point the next hop to the gateway address provided by the
 ISP, and release the default routing to OSPF
 access the Internet.
 ```cmd
@@ -457,7 +471,7 @@ ammc [BJ-MSR3620-0] ip route-static 0.0.0.0 0 202.38.160.1
 Lab Task 4: Deploying network security mo
 1) The internal network uses private addresses. To access the Internet, address
 translation is required. Servers on the internal network can be released to the Internet.
-# Create ACL 2000, enter the interface connected to the Internet, and use Easy IP to enable
+ Create ACL 2000, enter the interface connected to the Internet, and use Easy IP to enable
 NAT
 ```cmd
 [BJ-MSR3620-0] acl basic 2000 ammo
@@ -465,7 +479,7 @@ NAT
 [BJ-MSR3620-0] interface g 0/1
 [BJ-MSR3620-0-GigabitEthernet0/1] nat outbound 2000
 ```
-# WWW and OA servers at the headquarter need to be released. The address of the WWW
+ WWW and OA servers at the headquarter need to be released. The address of the WWW
 server is 192.168.4.131, the address of the OA server is 192.168.4.130, and the port
 number is 8080
 ```cmd
@@ -475,7 +489,7 @@ number is 8080
 inside 192.168.4.130 8080
 ```
 2) Configure attack prevention.
-# Create and configure ACL 3001 Lamm
+Create and configure ACL 3001 Lamm
 Common viruses and ports attacked are shown below. All can be configured to ACL 3001.
 The following are some configuration commands commonly used in the current network and
 are for reference only.
@@ -513,6 +527,11 @@ rule 21 deny udp source-port eq 1434
 rule 30 deny tcp destination-port eq 3127
 rule 31 deny tcp destination-port eq 1025
 rule 32 deny tcp destination-port eq 5554
+
+
+
+
+
 rule 33 deny tcp destination-port eq 9996
 rule 34 deny tcp destination-port eg 1068
 rule 35 deny tcp destination-port eq 135
@@ -538,6 +557,7 @@ from the external network e
 ```cmd
 [BJ-MSR3620-0-GigabitEthernet0/1] packet-filter 3001 inbound
 ```
+
 
 
 
