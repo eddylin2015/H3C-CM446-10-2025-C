@@ -14,10 +14,17 @@
 ### LabTask1: config basic NAT
 ### 实验任务 1：配置基本 NAT
 
-在本测试中，私网客户端 Client_A 和 Client_B 需要访问公网服务器。RTB 不存储私网路由，因此在 RTA 上配置基本 NAT，为 Client_A 和 Client_B 动态分配公网地址。
+- 私网客户端 Client_A 和 Client_B 需要访问公网服务器。
+- RTB 不存储私网路由
+- 因此在 RTA 上配置基本 NAT，为 Client_A 和 Client_B 动态分配公网地址。
 
 ### 步骤 1：搭建测试环境
-根据图 13-1 搭建测试环境，在 RTA 和 RTB 的端口上配置 IP 地址。为了路由发往服务器的数据包，在 RTA 上配置指向 RTB 的静态路由，下一跳为 RTB G0/0。RTA 应能 ping 通服务器。将 Client_A 的 IP 地址配置为 10.0.0.1/24，网关为 10.0.0.254；将 Client_B 的 IP 地址配置为 10.0.0.2/24，网关为 10.0.0.254。
+
+根据图 13-1 搭建测试环境，在 RTA 和 RTB 的端口上配置 IP 地址。
+为了路由发往服务器的数据包，在 RTA 上配置指向 RTB 的静态路由，下一跳为 RTB G0/0。
+RTA 应能 ping 通服务器。
+- 将 Client_A 的 IP 地址配置为 10.0.0.1/24，网关为 10.0.0.254；
+- 将 Client_B 的 IP 地址配置为 10.0.0.2/24，网关为 10.0.0.254。
 
 ### 步骤 2：基本配置
 配置 IP 地址和路由。
@@ -39,12 +46,10 @@
 
 ```cmd
 C:\>ping 198.76.29.4
-
 Ping 198.76.29.4 with 32-byte data:
 Request timeout.
 Request timeout.
 Request timeout.
-
 Ping statistics of 198.76.29.4:
 Packets: sent = 4, received = 0, lost = 4 (100% lost),
 ```
@@ -98,14 +103,16 @@ Destination IP/port: 198.76.29.4/2048
 DS-Lite tunnel peer:
 VPN instance/VLAN ID/VLL ID: -/-1-
 Protocol: ICMP(1)
-lammoInitiator:
+Initiator:
 Source IP/port: 10.0.0.1/210
 Destination IP/port: 198.76.29.4/2048
 DS-Lite tunnel peer:-
 VPN instance/VLAN I
+Protocol: ICMP(1)
+Total sessions found:2
 
-<RTA>disLocal IP: 10.0.0.1
-
+<RTA>disp nat no-pat
+Local IP: 10.0.0.1
 Global IP: 198.76.28.12
 Reversible: N
 Type : Outbound
@@ -114,8 +121,7 @@ Global IP: 198.76.28.11
 Reversible:N
 Type : Outbound
 ```
-
-Check the entries one minute later. The last two entries are lost. Four minutes later, all entries are lost. The output information is as follows:
+Check the entries one minute later. The last two entries are lost.
 ```cmd
 <RTA>display nat session
 Total sessions found: 0
@@ -154,13 +160,14 @@ The NAT debugging information is as follows:
 # The current terminal is enabled to display debugging
 <RTA>debugging nat packet
 <RTA>*Nov 13 10:05:09:565 2014 RTA NAT/7/COMMON:
-PACKET: (GigabitEthernet0/0-out) Protocol: ICMP lammou@mail.mb
-logs
+PACKET: (GigabitEthernet0/0-out) Protocol: ICMP 
 10.0.0.1:0 - 198.76.29.4: 0(VPN: 0) ------>
 198.76.28.14: 0- 198.76.29.4: 0 (VPN: 0)
 ```
 Based on the debugging information, in the GigabitEthernet0/0-out direction, the source
 address of the ICMP packets 10.0.0.1 is converted to 198.76.28.14.
+
+IP+Port(65536) 用地址转换。
 
 ### Step 3 Restore the configuration.
 Delete the Basic NAT configuration on the RTA.
@@ -168,10 +175,11 @@ Delete the Basic NAT configuration on the RTA.
 # Delete the NAT address pool.
 [RTA]undo nat address-group 1
 # Delete the NAT binding under a port.
-[RTA]interface GigabitEthernet0/1 1. mbc. edu.
+[RTA]interface GigabitEthernet0/1 
 [RTA-GigabitEthernet0/1lundo nat outbound 2000
 ``
-### LabTask2: config NAPT
+
+## LabTask2: config NAPT
 The private network clients Client_A and Client_B need to access the public network server.
 Since the public network addresses are limited, the public network address range
 configured on the RTA is 198.76.28.11~198.76.28.11. Configure NAPT on the RTA to
@@ -456,6 +464,7 @@ configuration. The NAT Server configuration is as follows:
 
 ## command reference
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab13commandreference.png?raw=true)
+
 
 
 
