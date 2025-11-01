@@ -181,14 +181,20 @@ Delete the Basic NAT configuration on the RTA.
 
 ## LabTask2: config NAPT
 The private network clients Client_A and Client_B need to access the public network server.
+
 Since the public network addresses are limited, the public network address range
-configured on the RTA is 198.76.28.11~198.76.28.11. Configure NAPT on the RTA to
+configured on the RTA is 198.76.28.11~198.76.28.11.
+
+Configure NAPT on the RTA to
 dynamically allocate public network addresses and ports to Client_A and Client_В.
-Step 1 Build a test environment.
+
+### Step 1 Build a test environment.
 Build a test environment. See steps 1 and 2 in task 1. 
+
 Ping the server (IP address 198.76.29.4) on Client_A and Client_B, respectively. The
 output information is as follows:
-Step 2 Check connectivity.
+### Step 2 Check connectivity.
+```cmd
 C:\>ping 198.76.29.4
 Ping 198.76.29.4 with 32-byte data:
 Request timeout.
@@ -196,11 +202,16 @@ Request timeout.
 Request timeout.mmon Request timeout.
 Ping statistics of 198.76.29.4:
 Packets: sent = 4, received = 0, lost = 4 (100% lost),
+```
 Based on the previous information, Client_A and Client_B cannot ping the server.
+
 Configure NAPT.
-# Define flow with the source address located in the network segment 10.0.0.0/24
+
+Define flow with the source address located in the network segment 10.0.0.0/24
 using ACLS.
-Configure NAPT on the RTA.
+
+Configure NAPT on the RTA
+```cmd
 [RTA-acl-ipv4-basic-2000] rule 0 permit source 10.0.0.0 0.0.0.255
 [RTA]acl number 2000
 # Configure NAT address pool 1 with one address 198.76.28.11.
@@ -209,12 +220,15 @@ Configure NAPT on the RTA.
 Bind the NAT address with acl 2000 in the interface view, and deliver the addresses.
 [RTA]interface GigabitEthernet0/1
 [RTA-GigabitEthernet0/1] nat outbound 2000 address-group 1
+```
 The parameter no-pat is not carried, indicating that the NAT will convert the ports in the
 packets.
+
 Ping the server on Client_A and Client_B, respectively. The Client_A and Client_B can ping
 the server.
 ## Lab 13 Configuring NAT
-C:\>ping 198.76.29.4 larmou@mai
+```cmd
+C:\>ping 198.76.29.4 
 Ping 198.76.29.4 with 32-byte data:
 Reply from 198.76.29.4: byte=32 time=46ms TTL=253
 Reply from 198.76.29.4: byte=32 time=1ms TTL=253
@@ -224,9 +238,11 @@ Ping statistics of 198.76.29.4:
 Packets: sent = 4, received = 4, lost = 0 (0% lost)
 Estimated round trip time (unit in ms):
 Shortest = 1ms, longest = 46ms, average = 12ms
-Step 2 Check the NAT entries.
+```
+## Step 2 Check the NAT entries.
 Check the NAT entries on the RTA.
-[RTA]display nat session verbose mmou@mai
+```cmd
+[RTA]display nat session verbose 
 Initiator:
 Source IP/port: 10.0.0.1/247
 Destination IP/port: 198.76.29.4/2048
@@ -272,6 +288,7 @@ Responder->Initiator:
 336 bytes
 336 bytes 
 Total sessions found: 2
+```
 Based on the previous information, the source IP addresses 10.0.0.1 and 10.0.0.2 are
 converted to the same public network address 198.76.28.11. But, the port for 10.0.0.1 is
 12289, and the port for 10.0.0.2 is 12288. When the RTA receives reply packets destined to
@@ -279,36 +296,42 @@ converted to the same public network address 198.76.28.11. But, the port for 10.
 based on the port specified for conversion. The NAPT uses this method to convert packets
 on the IP layer and transport layer, which significantly improves the usage of public
 addresses.
-Step 3 Restore the configuration.
+
+### Step 3 Restore the configuration.
 Delete the NAPT configuration on the RTA.
+```cmd
 [RTA]undo nat address-group 1
 [RTA]interface GigabitEthernet 0
 [RTA-GigabitEthernet0/1]undo nat outbound 2000
-
+```
 ### LabTask3: Easy IP
 The private network clients Client_A and Client_B need to access the public network server.
 Use public network port IP addresses to dynamically allocate public network addresses
 and ports to Client_A and Client_B.
-Step 1 Build a test environment.
+
+### Step 1 Build a test environment.
 Build a test environment. See steps 1 and 2 in task 1. ammoU
 du. mo
 Ping the server (IP address 198.76.29.4) on Client_A and Client_B, respectively. The
 Client_A and Client_B cannot ping the server.
-Step 2 Check connectivity.
-Step 3 Configure Easy IP. edu. mo
-# Define flow with the source address located in the network segment 10.0.0.0/24
+### Step 2 Check connectivity.
+### Step 3 Configure Easy IP. edu. mo
+Define flow with the source address located in the network segment 10.0.0.0/24
 using ACLS.
 Configure Easy IP on the RTA.
+```cmd
 [RTA-acl-ipv4-basic-20001 rule 0 permit source 10.0.0.0 0.0.0.255
 [RTA]acl number 2000
 # Bind the acl 2000 with a port and deliver NAT.
 [RTA]interface GigabitEthernet0/1
 [RTA-GigabitEthernet0/1] nat outbound 2000
+```
 Ping the server on Client_A and Client_B, respectively. The Client_A and Client_B can ping
 the server.
-Step 4 Check connectivity.
-Step 5 Check the NAT entries.
+### Step 4 Check connectivity.
+### Step 5 Check the NAT entries.
 Check the NAT entries on the RTA.
+```cmd
 [RTA]display nat session verbose
 Initiator:
 IP/port: 10.0.0.1/255
@@ -358,10 +381,12 @@ There are currently 2 NAT sessions:
 Protocol GlobalAddr Port InsideAddr Port DestAddr Port
 TCMP 198.76.28.1 12290 10.0.0.1 1024 198.76.29.4 1024
 ICMP 198.76.28.1 12289 10.0.0.2 512 198.76.29.4 512
+```
 Based on the previous information, the source IP addresses 10.0.0.1 and 10.0.0.2 have
 been converted to the outbound port address 198.76.28.1 of the RTA.
 After the NAT configuration, if the Client_A can ping the server, can the server ping the
-Client_A? The output information is as follows: lammo
+Client_A? The output information is as follows: 
+```cmd
 C:\ping 10.0.0.1
 Ping 10.0.0.1 with 32-byte data:
 Request timeout.
@@ -370,7 +395,9 @@ Request timeout.
 Request timeout.
 Packets: sent = 4, received = 0, lost = 4 (100% lost),
 Ping statistics of 10.0.0.1:
-The server cannot ping the Client_A.Why? edu. mo
+```
+The server cannot ping the Client_A.Why? 
+
 The RTA does not have a route to 10.0.0.0/24, so the server cannot ping the Client_A. The
 Client_A can ping the server, because the ICMP reply packet of the server uses the server address 198.76.29.4 as the source address and the RTA outbound address 198.76.28.1 as
 the destination address. The actual source address of Client_A is 10.0.0.1. That is, the
@@ -381,25 +408,30 @@ addresses.
 To know how to ping the Client_A on the server, go to task 4.
 Step 6 Restore the configuration.
 Delete the Easy IP configuration on the RTA.
+```cmd
 [RTA]undo nat address-group 1
 [RTA]interface GigabitEthernet0/1
 [RTA-GigabitEthernet0/1]undo nat outbound 2000
+```
 ### LabTask4: NAT Server
 The Client_A needs to provide ICMP services externally. Map the Client_A to the static
 public network address 198.76.28.11 and port on the RTA.
 Ping the Client_A private network address 10.0.0.1 on the server. The server cannot ping
 the Client_A.
-Step 1 Check connectivity.
-Step 2 Configure NAT Server.
+### Step 1 Check connectivity.
+### Step 2 Configure NAT Server.
 Configure NAT Server on the RTA.
+```cmd
 [RTB]interface GigabitEthernet 0/1 
 #Implement one-to-one NAT mapping for the private network server address and public
 network address on the outbound port.
 [RTB-GigabitEthernet0/1]nat server protocol icmp global 198.76.28.11 inside
 10.0.0.1
+```
 Ping the Client_A public network address 198.76.28.11 on the server. The server can ping
 the Client A.
-Step 3 Check connectivity.
+### Step 3 Check connectivity.
+```cmd
 C:\>ping 198.76.28.11
 Pinging 198.76.28.11 with 32 bytes of data: edu. mo
 TTI=126
@@ -411,8 +443,10 @@ Ping statistics for 198.76.28.11:
 Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
 Minimum = 1ms, Maximum = 1ms, Average = 1ms
-Step 4 Check the NAT entries.
+```
+### Step 4 Check the NAT entries.
 Check the NAT Server entries on the RTА.
+```cmd
 [RTA]display nat session verbose
 Initiator:
 Source IP/port: 198.76.29.4/236
@@ -441,12 +475,15 @@ Server in private network information:
 There are currently 1 internal servers
 Interface: GigabitEthernet0/1, Protocol:1(icmp),
 [global] 198.76.28.11: ---- [local]10.0.0.1:
+```
 Based on the previous information, the public network address maps to the private network
 address one by one.
-Step 5 Restore the configuration.
+### Step 5 Restore the configuration.
 Delete the NAT Server configuration on the RTA.
+```cmd
 [RTA]interface GigabitEthernet0/1
 [RTA-GigabitEthernet0/1]undo nat server protocol icmp global 198.76.28.11
+```
 The NAT Server is to meet the requirement of a public network client to access a private
 network server. The NAT Server maps the private network address/port to a static public
 network address/port for the public network client to access. In practical application, if the
@@ -457,6 +494,7 @@ Client_B pings the server, can the ping be successfully as well? amm
 Based on the NAT Server configuration command on the RTA, if the Client_A is an FTP
 server, can it provide FTP services externally? The answer is yes. Modify the NAT Server
 configuration. The NAT Server configuration is as follows:
+```cmd
 [RTB-GigabitEthernet0/1]nat server protocol tcp global 198.76.28.11 ftp inside
 10.0.0.1 ftp
 [RTB]interface GigabitEthernet 0/1
@@ -464,6 +502,7 @@ configuration. The NAT Server configuration is as follows:
 
 ## command reference
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab13commandreference.png?raw=true)
+
 
 
 
