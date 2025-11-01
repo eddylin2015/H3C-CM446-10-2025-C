@@ -177,7 +177,7 @@ Delete the Basic NAT configuration on the RTA.
 # Delete the NAT binding under a port.
 [RTA]interface GigabitEthernet0/1 
 [RTA-GigabitEthernet0/1lundo nat outbound 2000
-``
+```
 
 ## LabTask2: config NAPT
 The private network clients Client_A and Client_B need to access the public network server.
@@ -464,6 +464,7 @@ configuration. The NAT Server configuration is as follows:
 
 ## command reference
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab13commandreference.png?raw=true)
+
 
 
 
