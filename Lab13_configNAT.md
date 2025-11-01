@@ -234,21 +234,24 @@ using ACLS.
 
 Configure NAPT on the RTA
 ```cmd
+[RTA]acl basic 2000
 [RTA-acl-ipv4-basic-2000] rule 0 permit source 10.0.0.0 0.0.0.255
-[RTA]acl number 2000
 ```
 
 Configure NAT address pool 1 with one address 198.76.28.11.
 ```cmd
-[RTA-address-group-1]address 198.76.28.11 198.76.28.11
 [RTA] nat address-group 1
+[RTA-address-group-1]address 198.76.28.11 198.76.28.11
 ```
 
 Bind the NAT address with acl 2000 in the interface view, and deliver the addresses.
+
+在接口视图下将 NAT 地址池与acl 2000 绑定并下发。
 ```cmd
 [RTA]interface GigabitEthernet0/1
 [RTA-GigabitEthernet0/1] nat outbound 2000 address-group 1
 ```
+
 此时未携带 no-pat关键字,意味着 NAT 要对数据包进行端口的转换.
 The parameter no-pat is not carried, indicating that the NAT will convert the ports in the
 packets.
@@ -263,28 +266,24 @@ Ping 198.76.29.4 with 32-byte data:
 Reply from 198.76.29.4: byte=32 time=46ms TTL=253
 Reply from 198.76.29.4: byte=32 time=1ms TTL=253
 Reply from 198.76.29.4: byte=32 time=1ms TTL=253
-Reply from 198.76.29.4: byte=32 time=1ms TTL=253
-Ping statistics of 198.76.29.4:
-Packets: sent = 4, received = 4, lost = 0 (0% lost)
-Estimated round trip time (unit in ms):
-Shortest = 1ms, longest = 46ms, average = 12ms
 ```
+
 ## Step 5 Check the NAT entries.
 Check the NAT entries on the RTA.
 ```cmd
 [RTA]display nat session verbose 
 Initiator:
-Source IP/port: 10.0.0.1/247
-Destination IP/port: 198.76.29.4/2048
-DS-Lite tunnel peer: -
-VPN instance/VLAN ID/VLL ID:-/-/-
-Protocol: ICMP (1)
+ Source IP/port: 10.0.0.1/247
+ Destination IP/port: 198.76.29.4/2048
+ DS-Lite tunnel peer: -
+ VPN instance/VLAN ID/VLL ID:-/-/-
+ Protocol: ICMP (1)
 Responder:
-Source IP/port: 198.76.29.4/2
-Destination IP/port: 198.76.28.11/0
-DS-Lite tunnel peer:
-VPN instance/VLAN ID/VLL ID: -1-/-
-Protocol: ICMP(1)
+ Source IP/port: 198.76.29.4/2
+ Destination IP/port: 198.76.28.11/0
+ DS-Lite tunnel peer:
+ VPN instance/VLAN ID/VLL ID: -1-/-
+ Protocol: ICMP(1)
 State: ICMP REPLY
 Application: OTHER
 Start time: 2014-11-13 10:19:04 TTL:15s
@@ -292,18 +291,19 @@ Interface (in) : GigabitEthernet0/0
 Interface (out): GigabitEthernet0/1
 Initiator->Responder: 5 packets 420 packets
 Responder->Initiator: 5 packets 420 packets
+
 Initiator:
-Source IP/port: 10.0.0.2/218
-Destination IP/port: 198.76.29.4/2048
-DS-Lite tunnel peer: -
-VPN instance/VLAN ID/VLL ID:-/-/-
-Protocol: ICMP(1)
+ Source IP/port: 10.0.0.2/218
+ Destination IP/port: 198.76.29.4/2048
+ DS-Lite tunnel peer: -
+ VPN instance/VLAN ID/VLL ID:-/-/-
+ Protocol: ICMP(1)
 Responder:
-Source IP/port: 198.76.29.4/3
-Destination IP/port: 198.76.28.11/0
-DS-Lite tunnel peer:
-VPN instance/VLAN ID/VLL ID: -/-/-
-Protocol: ICMP (1)
+ Source IP/port: 198.76.29.4/3
+ Destination IP/port: 198.76.28.11/0
+ DS-Lite tunnel peer:
+ VPN instance/VLAN ID/VLL ID: -/-/-
+ Protocol: ICMP (1)
 State: ICMP REPLY
 Application: OTHER
 Start time: 2014-11-13 10:19:09 TTL: 22s
@@ -314,6 +314,12 @@ Responder->Initiator: 4 packets 336 bytes
 
 Total sessions found: 2
 ```
+从表项中可以看到源地址 10.0.0.1 和 10.0.0.2 都转换成同一个公网地址 198.76.28.11,所
+不同的是转换后的端口,10.0.0.1 转换后的端口为12289, 10.0.0.2 转换后的端口为12288.
+当RTA 出接口收到目的地址为 198.76.28.11 的回程流量时,正是用当初转换时赋予的不同的
+端口来分辩该流量是转发给 10.0.0.1 还是10.0.0.2。NAPT 正是靠这种方式,对数据包的IP
+和传输层信息同时进行转换,显著地提高公有IP地址的利用效.
+
 Based on the previous information, the source IP addresses 10.0.0.1 and 10.0.0.2 are
 converted to the same public network address 198.76.28.11. But, the port for 10.0.0.1 is
 12289, and the port for 10.0.0.2 is 12288. When the RTA receives reply packets destined to
@@ -329,7 +335,7 @@ Delete the NAPT configuration on the RTA.
 [RTA]interface GigabitEthernet 0
 [RTA-GigabitEthernet0/1]undo nat outbound 2000
 ```
-### LabTask3: Easy IP
+### LabTask3实验任务三:: Easy IP
 
 私网客户端 Client_A、Client_B 需要访问公网服务器 Server,使用公网接口 IP地址动态
 为 Client_A、Client_B分配公网地址和协议端口。
@@ -351,8 +357,8 @@ Client_A and Client_B cannot ping the server.
 Define flow with the source address located in the network segment 10.0.0.0/24 using ACLS.
 Configure Easy IP on the RTA.
 ```cmd
-[RTA-acl-ipv4-basic-20001 rule 0 permit source 10.0.0.0 0.0.0.255
-[RTA]acl number 2000
+[RTA]acl basic 2000
+[RTA-acl-ipv4-basic-2000] rule 0 permit source 10.0.0.0 0.0.0.255
 ```
 Bind the acl 2000 with a port and deliver NAT.
 在接口视图下将 acl 2000与接口关联下发 NAT。
@@ -360,26 +366,30 @@ Bind the acl 2000 with a port and deliver NAT.
 [RTA]interface GigabitEthernet0/1
 [RTA-GigabitEthernet0/1] nat outbound 2000
 ```
+
+### Step 4 Check connectivity.
+
+从 Client_A、Client_B 分别 ping Serv,OK
+
 Ping the server on Client_A and Client_B, respectively. The Client_A and Client_B can ping
 the server.
-### Step 4 Check connectivity.
-从 Client_A、Client_B 分别 ping Serv,OK
+
 ### Step 5 Check the NAT entries.
 Check the NAT entries on the RTA.
 ```cmd
 [RTA]display nat session verbose
 Initiator:
-Source IP/port: 10.0.0.1/255
-Destination IP/port: 198.76.29.4/2048
-DS-Lite tunnel peer: -
-VPN instance/VLAN ID/VLL ID: -/-1-
-Protocol: ICMP (1)
+ Source IP/port: 10.0.0.1/255
+ Destination IP/port: 198.76.29.4/2048
+ DS-Lite tunnel peer: -
+ VPN instance/VLAN ID/VLL ID: -/-1-
+ Protocol: ICMP (1)
 Responder:
-Source IP/port: 198.76.29.4/2
-Destination IP/port: 198.76.28.1/0
-DS-Lite tunnel peer:-
-VPN instance/VLAN ID/VLL ID: -1-1-
-Protocol: ICMP(1)
+ Source IP/port: 198.76.29.4/2
+ Destination IP/port: 198.76.28.1/0
+ DS-Lite tunnel peer:-
+ VPN instance/VLAN ID/VLL ID: -1-1-
+ Protocol: ICMP(1)
 State: ICMP REPLY 
 Application: OTHER
 Start time: 2014-11-13 10:24:56 TTL: 15s
@@ -389,18 +399,18 @@ Initiator->Responder: 5 packets 420 bytes
 Responder->Initiator: 5 packets 420 bytes
 
 Initiator:
-Source IP/port: 10.0.0.2/219
-Destination IP/port: 198.76.29.4/2048
-DS-Lite tunnel peer: -
-VPN instance/VLAN
-Protocol: ICMP (1)
+ Source IP/port: 10.0.0.2/219
+ Destination IP/port: 198.76.29.4/2048
+ DS-Lite tunnel peer: -
+ VPN instance/VLAN
+ Protocol: ICMP (1)
 Responder:
-ID/VLL ID: -/-/-
-Source IP/port: 198.76.29.4/3
-Destination IP/port: 198.76.28.1/0
-DS-Lite tunnel peer: -
-VPN instance/VLAN ID/VLL ID: -1-1-
-Protocol: ICMP(1)
+ ID/VLL ID: -/-/-
+ Source IP/port: 198.76.29.4/3
+ Destination IP/port: 198.76.28.1/0
+ DS-Lite tunnel peer: -
+ VPN instance/VLAN ID/VLL ID: -1-1-
+ Protocol: ICMP(1)
 State: ICMP REPLY
 Application: OTHER
 Start time: 2014-11-13 10:24:59 TTL: 19
@@ -409,7 +419,9 @@ Interface (out): GigabitEthernet0/1
 itiator->Responder: 5 packets 420 bytes
 Responder->Initiator: 5 packets 420 bytes
 Total sessions found: 2
+
 <RTA>display nat session brief
+
 There are currently 2 NAT sessions:
 Protocol GlobalAddr Port InsideAddr Port DestAddr Port
 TCMP 198.76.28.1 12290 10.0.0.1 1024 198.76.29.4 1024
@@ -444,6 +456,9 @@ and forward packets. Note that NAT is effective to the RTA outbound port Eth 0/1
 sending ICMP packets from the server to ping the client cannot trigger the RTA to convert
 addresses. 
 To know how to ping the Client_A on the server, go to task 4.
+
+结果显示 Server 不能 ping 通 Client_A。为什么呢?
+
 仔细思考,不难发现在 RTA 上始终没有 10.0.0.0/24 网段的路由,所以 Server 直接 ping
 Client_A是不可达的。而 Client_A能 ping 通 Server 是因为,由Server 回应的ICMP 回程报
 文源地址是 Server 的地址 198.76.29.4,但是目的地址是RTA 的出接口地址 198.76.28.1,而
@@ -480,6 +495,8 @@ Configure NAT Server on the RTA.
 ```cmd
 [RTB]interface GigabitEthernet 0/1
 ```
+在出接口上将私网服务器地址和公网地址做一对一NAT 映射。
+
 Implement one-to-one NAT mapping for the private network server address and public
 network address on the outbound port.
 ```cmd
@@ -487,6 +504,9 @@ network address on the outbound port.
 10.0.0.1
 ```
 ### Step 3 Check connectivity.
+
+从 Server 主动 ping Client_A 的公网地址 198.76.28.
+
 Ping the Client_A public network address 198.76.28.11 on the server. The server can ping
 the Client A.
 ```cmd
@@ -494,30 +514,25 @@ C:\>ping 198.76.28.11
 Pinging 198.76.28.11 with 32 bytes of data: edu. mo
 TTI=126
 Reply from 198.76.28.11: bytes=32 time=1ms TTL=126
-Reply from 198.76.28.11: bytes=32 time=1ms
 Reply from 198.76.28.11: bytes=32 time=1ms TTL=126
 Reply from 198.76.28.11: bytes=32 time=1ms TTL=126
-Ping statistics for 198.76.28.11:
-Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
-Approximate round trip times in milli-seconds:
-Minimum = 1ms, Maximum = 1ms, Average = 1ms
 ```
 ### Step 4 Check the NAT entries.
 Check the NAT Server entries on the RTА.
 ```cmd
 [RTA]disp nat session verbose
 Initiator:
-Source IP/port: 198.76.29.4/236
-Destination IP/port: 198.76.28.11/2048
-DS-Lite tunnel peer: -
-VPN instance/VLAN ID/VLL ID: -/-/-
-Protocol: ICMP (1)
+ Source IP/port: 198.76.29.4/236
+ Destination IP/port: 198.76.28.11/2048
+ DS-Lite tunnel peer: -
+ VPN instance/VLAN ID/VLL ID: -/-/-
+ Protocol: ICMP (1)
 Responder:
-Source IP/port: 10.0.0.1/236
-Destination IP/port: 198.76.29.4/0
-DS-Lite tunnel peer:
-VPN instance/VLAN ID/VLL ID: -/-/-
-Protocol: ICMP(1)
+ Source IP/port: 10.0.0.1/236
+ Destination IP/port: 198.76.29.4/0
+ DS-Lite tunnel peer:
+ VPN instance/VLAN ID/VLL ID: -/-/-
+ Protocol: ICMP(1)
 State: ICMP REPLY
 Application: OTHER
 Start time: 2014-11-13 10:31:45 TTL: 26s
@@ -532,13 +547,15 @@ Total sessions found: 1
 Server in private network information:
 There are currently 1 internal servers
 Interface: GigabitEthernet0/1, Protocol:1(icmp),
-[global] 198.76.28.11: ---- [local]10.0.0.1:
+     [global] 198.76.28.11: ---- [local]10.0.0.1:
 ```
 表项信息中显示出公网地址和私网地址的一对一的映射关系。
 
 Based on the previous information, the public network address maps to the private network
 address one by one.
+
 ### Step 5 Restore the configuration.
+
 Delete the NAT Server configuration on the RTA.
 ```cmd
 [RTA]interface GigabitEthernet0/1
@@ -569,11 +586,11 @@ configuration. The NAT Server configuration is as follows:
 [RTB]interface GigabitEthernet 0/1
 [RTB-GigabitEthernet0/1]nat server protocol tcp global 198.76.28.11 ftp inside
 10.0.0.1 ftp
-
 ```
 
 ## command reference
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab13commandreference.png?raw=true)
+
 
 
 
