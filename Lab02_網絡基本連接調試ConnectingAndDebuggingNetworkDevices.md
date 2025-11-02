@@ -23,13 +23,13 @@ PC                   |            |2
 Cat5UTPEthernetCable |            |4
 
 ## Lab Procedure
-## 实验任务一:搭建基本连接环境
+## 实验任务一:搭建基本连接环境Building a Connection Environment
 本实验任务供学员熟悉并掌握路由器、交换机、PC的基本网络连接配置。
-### 步骤一:完成 PC、交换机、路由器互连 edu. mo
+### 步骤一:完成 PC、交换机、路由器互连 Connect PCs, switches, and routers.
 在教师指导下,完成两台路由器通过以太口GO/O 背靠背相连;路由器以太口 GO/1 分别下
 接一台交换机(S5820V2);PC 通过网线连接到交换机端口上。
-- routers G0/0
-- router to switch G0/1
+-  connect two routers using Ethernet port GO/0
+-  Connect the routers to a switch S5820V2 using Ethernet port G0/1,
 ### 步骤二:配置 IP 地址
 ```cmd
 # The RTA configuration is as follows:
