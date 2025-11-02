@@ -83,13 +83,14 @@ interface GigabitEthernet1/0/24
 
 
 ## cmd list
-- interface bridge-aggregation interface-num
-- port link-aggregation group number
-- disp link-aggregation summary
+- interface bridge-aggregation interface-num 创建聚合端口
+- port link-aggregation group number 将以太网端口加入聚合组中
+- disp link-aggregation summary查看链路聚合的概要信息
 ## 思考題
 
 ## 總結
 完成
+
 
 
 
