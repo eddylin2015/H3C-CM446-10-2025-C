@@ -88,7 +88,7 @@ Welcome LM SW %
 
 ### PC需要設置靜態IP及UP STATUS
 
-![](https://90apt.com/usr/uploads/2023/05/3571188184.png)
+![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab01PCA.png?raw=true)
 
 ## Telnet指令
 ```cmd
