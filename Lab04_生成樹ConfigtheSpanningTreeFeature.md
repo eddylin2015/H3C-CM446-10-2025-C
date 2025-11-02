@@ -10,49 +10,34 @@
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/hcl_aefc21344210.png?raw=true)
 
 ```cmd
- sysname PCA
-#
+ 
+#PCA
 interface GigabitEthernet0/0/1
- combo enable copper
  ip address 172.16.0.1 255.255.255.0
-#
-```
-```cmd
- sysname PCB
-#
+
+#PCB
 interface GigabitEthernet0/0/1
- combo enable copper
  ip address 172.16.0.2 255.255.255.0
 #
 ```
 
 ## Lab Process
 ```cmd
- sysname SWA
-#
-vlan 1
-#
+# SWA
  stp instance 0 priority 0
  stp global enable
-#
 interface GigabitEthernet1/0/1
  port link-mode bridge
- combo enable fiber
  stp edged-port
 #
 disp stp 
 ```
 ```cmd
- sysname SWB
-#
-vlan 1
-#
+# SWB
  stp instance 0 priority 4096
  stp global enable
-#
 interface GigabitEthernet1/0/1
  port link-mode bridge
- combo enable fiber
  stp edged-port
 #
 disp stp 
