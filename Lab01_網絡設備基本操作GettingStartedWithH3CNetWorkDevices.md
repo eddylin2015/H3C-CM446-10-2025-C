@@ -26,9 +26,10 @@ line vty 0 63
 user interface vty 0 63
 ```
 
-2011年版交換機H3C S3600V2
 
+交換機H3C S3600V2
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/figure100.png.jpg?raw=true)
+
 
 參考指令
 
@@ -40,17 +41,7 @@ https://www.h3c.com/cn/d_201111/729703_30005_0.htm#aa_3
 
 Figure 1-1 Lab diagram
 
-```console
-         
-  ┌───────┐    Console Cable    ┌───────────────────────────────┐     
-  │   COM │ ─────────────────── │  Console port                 │
-  │ PC    │                     │        MSR36-20 Router/Switch │
-  │   Nic │ ─────────────────── │  GigabitEthernet              │   
-  └───────┘    Cable            └───────────────────────────────┘
-
-```
-
-Equipment and Cable
+![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab01labDiagram.png?raw=true)
 
 Item                      |  Version  | Quantity  | Description   
 --------------------------|-----------|-----------|-----------------
@@ -77,14 +68,6 @@ Cat5 UTP Ethernet Cable   |
 System View: return to User View with Ctrl+Z.
 [H3C]sysname lmsw
 [lmsw]save
-The current configuration will be written to the device. Are you sure? [Y/N]:
-Before pressing ENTER you must choose 'YES' or 'NO'[Y/N]:
-Before pressing ENTER you must choose 'YES' or 'NO'[Y/N]:Y
-Please input the file name(*.cfg)[flash:/startup.cfg]
-(To leave the existing filename unchanged, press the enter key):
-flash:/startup.cfg exists, overwrite? [Y/N]:Y
-Validating file. Please wait...
-Configuration is saved to device successfully.
 [lmsw]password-control super aging 365
 [lmsw]password-control super length 4
 [lmsw]password-control length 4
@@ -110,7 +93,8 @@ Welcome LM SW %
 [lmsw]q
 <lmsw>reboot
 <lmsw>display interface brief
-GigabitEthernet0/1 up up
+
+     GigabitEthernet0/1 up up
 ```
 
 ## PC Telnet實驗
