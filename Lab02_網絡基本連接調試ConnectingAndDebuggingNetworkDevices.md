@@ -60,23 +60,24 @@ Connect the PCA to the router port G0/1 via the L2 switch.
 ```cmd
 [RTA]disp ip routing-table
 Destinations : 17 Routes 17
+
 Destination/Mask Proto Pre Cost NextHop Interface
-0.0.0.0/32 Direct 0 0 127.0.0.1 InLoop0
-127.0.0.0/8 Direct 0 0 127.0.0.1 InLoop0
-127.0.0.0/32 Direct 0 0 127.0.0.10 InLoop0
-127.0.0.1/32 Direct 00 127.0.0.1 InLoop0
+0.0.0.0/32       Direct 0 0 127.0.0.1 InLoop0
+127.0.0.0/8      Direct 0 0 127.0.0.1 InLoop0
+127.0.0.0/32     Direct 0 0 127.0.0.10 InLoop0
+127.0.0.1/32     Direct 0 0 127.0.0.1 InLoop0
 127.255.255.255/32 Direct 0 0 127.0.0.1 InLoopo
-192.168.0.0/24 Direct 0 0 192.168.0.1 GE0/1
-192.168.0.0/32 Direct 0 0 192.168.0.1 GE0/1
-192.168.0.1/32 Direct 0 0 127.0.0.1 InLoop0
+192.168.0.0/24   Direct 0 0 192.168.0.1 GE0/1
+192.168.0.0/32   Direct 0 0 192.168.0.1 GE0/1
+192.168.0.1/32   Direct 0 0 127.0.0.1 InLoop0
 192.168.0.255/32 Direct 0 0 192.168.0.1 GEO/1
-192.168.1.0/30 Direct 0 0 192.168.1.1 GO/0
-192.168.1.0/32 Direct 0 0 192.168.1.1 GO/0
-192.168.1.1/32 Direct 0 0 127.0.0.1 InLoop0
-192.168.1.2/32 Direct 0 0 192.168.1.2 GO/0
-192.168.1.3/32 Direct 0 0 192.168.1.1 GO/0
-224.0.0.0/4 Direct 0 0 0.0.0.0 NULLO
-224.0.0.0/24 Direct 0 0 0.0.0.0 NULLO
+192.168.1.0/30   Direct 0 0 192.168.1.1 GO/0
+192.168.1.0/32   Direct 0 0 192.168.1.1 GO/0
+192.168.1.1/32   Direct 0 0 127.0.0.1 InLoop0
+192.168.1.2/32   Direct 0 0 192.168.1.2 GO/0
+192.168.1.3/32   Direct 0 0 192.168.1.1 GO/0
+224.0.0.0/4      Direct 0 0 0.0.0.0 NULLO
+224.0.0.0/24     Direct 0 0 0.0.0.0 NULLO
 255.255.255.255/32 Direct 0 0 127.0.0.1 InLoop0
 ```
 
