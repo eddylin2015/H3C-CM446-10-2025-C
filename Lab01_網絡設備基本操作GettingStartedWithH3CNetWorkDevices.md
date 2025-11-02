@@ -42,9 +42,9 @@ Cat5 UTP Ethernet Cable   |
 ### 補充指令password-control
 解決 telnet 連結時 super 問題.
 ```cmd
-[lmsw]password-control super aging 365
-[lmsw]password-control super length 4
-[lmsw]password-control length 4
+[SWA]password-control super aging 365
+[SWA]password-control super length 4
+[SWA]password-control length 4
 ```
 
 ### MSR36-20 Console-CLI
@@ -53,31 +53,31 @@ Cat5 UTP Ethernet Cable   |
 <H3C>
 <H3C>system-view
 System View: return to User View with Ctrl+Z.
-[H3C]sysname lmsw
-[lmsw]save
-[lmsw]password-control super aging 365
-[lmsw]password-control super length 4
-[lmsw]password-control length 4
-[lmsw]local-user test
+[H3C]sysname SWA
+[SWA]save
+[SWA]password-control super aging 365
+[SWA]password-control super length 4
+[SWA]password-control length 4
+[SWA]local-user test
 New local user added.
-[lmsw-luser-manage-test]password simple abc1
-[lmsw-luser-manage-test]service-type telnet
-[lmsw-luser-manage-test]authorization-attribute user-role level-0
-[lmsw-luser-manage-test]q
-[lmsw]super password role level-15 simple abc1
-[lmsw]header login
+[SWA-luser-manage-test]password simple abc1
+[SWA-luser-manage-test]service-type telnet
+[SWA-luser-manage-test]authorization-attribute user-role level-0
+[SWA-luser-manage-test]q
+[SWA]super password role level-15 simple abc1
+[SWA]header login
 Please input banner content, and quit with the character '%'.
 Welcome LM SW %
-[lmsw]line vty 0 63
-[lmsw-line-vty0-63]authentication-mode scheme
-[lmsw-line-vty0-63]q
-[lmsw]telnet server enable
-[lmsw]interface GigabitEthernet0/1
-[lmsw-GigabitEthernet0/1]port link-mode route
-[lmsw-GigabitEthernet0/1]combo enable copper
-[lmsw-GigabitEthernet0/1]ip address 10.1.1.1 255.255.255.0
-[lmsw-GigabitEthernet0/1]q
-[lmsw]q
+[SWA]line vty 0 63
+[SWA-line-vty0-63]authentication-mode scheme
+[SWA-line-vty0-63]q
+[SWA]telnet server enable
+[SWA]interface GigabitEthernet0/1
+[SWA-GigabitEthernet0/1]port link-mode route
+[SWA-GigabitEthernet0/1]combo enable copper
+[SWA-GigabitEthernet0/1]ip address 10.1.1.1 255.255.255.0
+[SWA-GigabitEthernet0/1]q
+[SWA]q
 <lmsw>reboot
 <lmsw>display interface brief
 
@@ -93,13 +93,13 @@ Welcome LM SW %
 ## Telnet指令
 ```cmd
 [H3C]telnet 10.1.1.1
-Welcome LM SW %
+Welcome SWA %
 login:test
 password:abc1
-<lmsw>super
+<SWA>super
 password:abc1
-<lmsw>sys
-[lmsw]display interface brief
+<SWA>sys
+[SWA]display interface brief
 GigabitEthernet0/1 up up 
 ```
 
@@ -116,7 +116,6 @@ line vty 0 63
 # 改為
 user interface vty 0 63
 ```
-
 
 ## 總結
 
