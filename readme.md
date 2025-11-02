@@ -57,7 +57,7 @@ TIME 18:45-21:45
 - [HCL](https://www.h3c.com/cn/Home/Agreement//default.htm?t=HCL_Setup_V5.10.3&s=11068062)
 
 ## 培训教材EBook/参考
-- [https://wsso.h3c.com](https://www.h3c.com/en/) Mbc@123321
+- [https://wsso.h3c.com](https://www.h3c.com/en/) 
 - [https://c.h3c.com](https://c.h3c.com/en/)
 - [中文讲义](https://www.h3c.com/cn/BizPortal/TrainingPartner/TeachingMaterial/TeachingMaterialCertification.aspx)
 - 进修资助计划PDAC 3.18 3.1.13
