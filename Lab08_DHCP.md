@@ -10,7 +10,10 @@
 ## Lab Process
 ### TASK1实验任务一:PCA 直接通过 RTA 获得 IP 地址
 ####  步骤二:在路由器接口配置 IP 地址
-RTA G0/0 172.16.0.1/24
+表8-2 IP地址列表
+|设备名称| 接口 |IP地址| 网关|
+|----|----|----|----|
+|RTA| G0/0| 172.16.0.1/24|
 ```cmd
 [RTA-GigabitEthernet0/0]ip address 172.16.0.1 24
 ```
@@ -43,9 +46,12 @@ interface GigabitEthernet0/0
 ## TASK2实验任务二:PCA 通过 DHCP 中继方式获得 IP地址
 
 ### 步骤二:在设备上配置 IP地址及路由
-- SWA G1/0/1 172.16.1.1/24 Vlan-interface1
-- SWA G1/0/2 172.16.0.1/24 Vlan-interface2
-- RTA G0/0 172.16.0.2./24
+表8-3 设备 IP地址列表
+| 设备名称|  物理接口 | IP地址|  VLAN 虚接口| 
+|---|---| ---|---| 
+| SWA | G1/0/1 | 172.16.1.1/24 | Vlan-interface1| 
+| SWA | G1/0/2 | 172.16.0.1/24|  Vlan-interface2| 
+| RTA | G0/0 | 172.16.0.2./24| 
 在SWA上配置 VLAN 虚接口及IP
 ```cmd
 [SWA]vlan 2
@@ -120,6 +126,8 @@ Vlan-interfacel 172.16.0.2
 ## 總結
 
 完成
+
+
 
 
 
