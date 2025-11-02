@@ -11,20 +11,7 @@ After completing the Lab, you will be able to:
 
 ## 真机實驗Lab_1
 
-### 實驗指令
 
-putty
-
-- text
-- control-h  control-?
-- serial com1-3
-
-指令參考HCL虛擬機實驗, 留意指令版本不同:
-```cmd
-line vty 0 63
-# 改為
-user interface vty 0 63
-```
 
 
 交換機H3C S3600V2
@@ -115,6 +102,22 @@ password:abc1
 [lmsw]display interface brief
 GigabitEthernet0/1 up up 
 ```
+
+## putty參數設定
+- text
+- control-h  control-?
+- serial com1-3
+
+## 勘误
+
+指令參考HCL虛擬機實驗, 留意指令版本不同:
+```cmd
+line vty 0 63
+# 改為
+user interface vty 0 63
+```
+
+
 ## 總結
 
 完成LAB1.
