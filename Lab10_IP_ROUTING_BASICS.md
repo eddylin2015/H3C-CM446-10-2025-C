@@ -257,3 +257,7 @@ Trace complete.
 - disp ip routing-table ip-addr [mask|mask-len] 
 - ipconfig
 
+結語
+
+完成
+
