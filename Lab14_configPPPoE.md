@@ -40,7 +40,9 @@ setting the address pool.
 [Server] dhcp enable 
 [Server] dhcp server ip-pool pool1
 [Server-dhcp-pool-pooll] network 1.1.1.0 24 export-route
+# export-route 無效指令 [client]ip route-static 0.0.0.0 0.0.0.0 1.1.1.1
 [Server-dhcp-pool-pooll] gateway-list 1.1.1.1 export-route
+# export-route 無效指令
 [Server-dhcp-pool-pool1] forbidden-ip 1.1.1.1
 ```
 ### Step 4 Configure a PPPoE user.
@@ -248,4 +250,6 @@ Total sessions found: 2
 ## command reference
 ![](https://github.com/eddylin2015/H3C-CM446-10-2025-C/blob/main/img/lab14commandreference.png?raw=true)
 
+## 結語
+完成
 
